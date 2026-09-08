@@ -83,7 +83,7 @@ def detail(c):
                  for (n, a, d, q), im in zip(c['food'], PH[c['id']]['food']))
     ln = ' '.join(f'<a href="{u}" target="_blank" rel="noopener">{html.escape(t)} ↗</a>' for t, u in c['links'])
     sub = f'Dec 21 tour: we choose course {c["id"]} ({c["name"]})'
-    return f'''<section class="detail" id="detail-{c['id']}" hidden><div class="dwrap">
+    return f'''<section class="detail" id="detail-{c['id']}" hidden><div class="dwrap"><div class="dtop"></div>
 <div class="dhead"><div><p class="kicker">Course {c['id']} · {html.escape(c['tag'])}</p><h2>{html.escape(c['name'])}</h2></div>
 <button class="dclose" type="button" aria-label="Close">Close ✕</button></div>
 <p class="why">{html.escape(c['why'])}</p>
@@ -120,7 +120,10 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .menu{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
 .mcard{{display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;padding:0;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}}
 .mcard:hover{{transform:translateY(-3px);box-shadow:0 10px 24px rgba(34,31,27,.10)}}
-.mcard[aria-expanded=true]{{border-color:var(--ink);box-shadow:0 10px 24px rgba(34,31,27,.14)}}
+.menu.picked .mcard:not([aria-expanded=true]){{opacity:.42;filter:saturate(.45)}}
+.menu.picked .mcard:not([aria-expanded=true]):hover{{opacity:.75;filter:none}}
+.mcard[aria-expanded=true]{{border:2px solid var(--ink);box-shadow:0 12px 28px rgba(17,17,17,.16);transform:translateY(-3px)}}
+.mcard[aria-expanded=true] .mopen{{color:var(--acc);border-bottom-color:var(--acc)}}
 .mcard>img{{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0ebe0}}
 .mb{{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}}
 .mk{{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}}
@@ -130,11 +133,14 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .mch li{{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:4px;padding:3px 8px;color:var(--mute)}}
 .mopen{{align-self:flex-start;display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
 .mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
-.detail{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:16px}}
+.detail{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:14px;position:relative}}
 .detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}}
-.dwrap{{overflow:hidden;min-height:0;background:var(--card);border-radius:var(--r)}}
+.dwrap{{overflow:hidden;min-height:0;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);position:relative}}
+.detail::before{{content:'';position:absolute;top:-11px;left:var(--arrow,50%);width:20px;height:20px;margin-left:-10px;background:var(--card);border-left:2px solid var(--ink);border-top:2px solid var(--ink);transform:rotate(45deg);z-index:2;opacity:0;transition:opacity .2s .12s}}
+.detail.open::before{{opacity:1}}
+.dtop{{height:5px;background:var(--acc)}}
 .detail.open .dwrap{{overflow:visible}}
-.dwrap>*{{margin-left:26px;margin-right:26px}} .dwrap>.photos{{margin-left:26px;margin-right:26px}}
+.dwrap>*{{margin-left:26px;margin-right:26px}} .dwrap>.dtop{{margin:0}} .dwrap>.photos{{margin-left:26px;margin-right:26px}}
 .dhead{{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:26px}}
 .dclose{{flex:none;font:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);background:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer}}
 .dclose:hover{{color:var(--ink);border-color:var(--ink)}}
@@ -189,10 +195,16 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
 <script>
 (function(){{
  var cards=[].slice.call(document.querySelectorAll('.mcard'));
- function close(id){{var d=document.getElementById('detail-'+id);d.classList.remove('open');setTimeout(function(){{if(!d.classList.contains('open'))d.hidden=true}},320);
+ function close(id){{var d=document.getElementById('detail-'+id);d.classList.remove('open');document.querySelector('.menu').classList.remove('picked');setTimeout(function(){{if(!d.classList.contains('open'))d.hidden=true}},320);
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','false')}}
- function open_(id){{var d=document.getElementById('detail-'+id);d.hidden=false;requestAnimationFrame(function(){{d.classList.add('open')}});
+ var menuEl=document.querySelector('.menu');
+ function point(id){{var b=document.querySelector('.mcard[data-course="'+id+'"]'),d=document.getElementById('detail-'+id);
+   var r=b.getBoundingClientRect(),w=d.getBoundingClientRect();
+   d.style.setProperty('--arrow',(r.left+r.width/2-w.left)+'px')}}
+ function open_(id){{var d=document.getElementById('detail-'+id);d.hidden=false;menuEl.classList.add('picked');
+   requestAnimationFrame(function(){{d.classList.add('open');point(id)}});
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','true')}}
+ window.addEventListener('resize',function(){{var o=document.querySelector('.mcard[aria-expanded=true]');if(o)point(o.dataset.course)}});
  var want=(location.hash.match(/^#detail-([ABC])$/)||[])[1]||(location.search.match(/[?&]open=([ABC])/)||[])[1];
  if(want){{open_(want);setTimeout(function(){{document.getElementById('detail-'+want).scrollIntoView()}},80)}}
  cards.forEach(function(b){{
@@ -210,7 +222,7 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
  }});
 }})();
 </script>
-{DEVBAR}</body></html>'''
+{{DEVBAR}}</body></html>'''
 open('index.html', 'w').write(page.replace('{DEVBAR}', ''))
 open('preview.html', 'w').write(page.replace(
     '{DEVBAR}',
