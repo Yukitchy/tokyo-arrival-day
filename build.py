@@ -99,7 +99,7 @@ def detail(c):
 <a class="choose" href="mailto:icchan417@gmail.com?subject={html.escape(sub)}">Choose course {c['id']}</a>
 </div></section>'''
 
-credits = '; '.join(html.escape(x['title']) + ' (' + x['lic'] + ')' for v in PH.values() for x in [v['card']] + v['detail'] + v['food'])
+credits = '; '.join(html.escape(x['title'].replace('File:','')) + ' (' + x['lic'] + ')' for v in PH.values() for x in [v['card']] + v['detail'] + v['food'])
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokyo, arrival day: three courses for the Katz family</title><meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -193,12 +193,14 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','false')}}
  function open_(id){{var d=document.getElementById('detail-'+id);d.hidden=false;requestAnimationFrame(function(){{d.classList.add('open')}});
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','true')}}
+ var want=(location.hash.match(/^#detail-([ABC])$/)||[])[1]||(location.search.match(/[?&]open=([ABC])/)||[])[1];
+ if(want){{open_(want);setTimeout(function(){{document.getElementById('detail-'+want).scrollIntoView()}},80)}}
  cards.forEach(function(b){{
   b.addEventListener('click',function(){{
    var id=b.dataset.course,was=b.getAttribute('aria-expanded')==='true';
    cards.forEach(function(o){{if(o.getAttribute('aria-expanded')==='true')close(o.dataset.course)}});
    if(was)return;
-   open_(id);
+   open_(id);history.replaceState(null,'','#detail-'+id);
    setTimeout(function(){{document.getElementById('detail-'+id).scrollIntoView({{behavior:'smooth',block:'start'}})}},60);
   }});
  }});

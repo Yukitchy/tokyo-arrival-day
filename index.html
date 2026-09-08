@@ -134,7 +134,7 @@ footer{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid
 <div class="mapbox"><iframe src="https://maps.google.com/maps?q=Haneda+Airport+Tokyo&output=embed&z=12" loading="lazy" title="Haneda airport and central Tokyo" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 </div>
 </div>
-<footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p><p>Photos: Sensoji0387.jpg (Public domain); Tokyo Cruise Ship Himiko.jpg (CC BY-SA 3.0); File:Tokio Hamarikyu-Garten-20091017-RM-141110.jpg (CC BY-SA 4.0); Rice bowl topped with shrimp tempura (8281030764).jpg (CC BY-SA 2.0); Kajikaso Dinner Sukiyaki.JPG (CC BY-SA 4.0); 和牛 屋台 2015 (31948446406).jpg (CC BY 2.0); Photos at teamlab planets tokyo.jpg (CC BY-SA 4.0); File:Japan 2024-04-28 (53893216070).jpg (CC BY 2.0); Kaisen-don (8126073697).jpg (CC BY 2.0); 010 Sushi master in Kyoto, Japan - sushi chef 寿司職人.jpg (CC BY 3.0); Panfried Salmon Nigiri - Shira Nui AUD4.50 each (4759206623).jpg (CC BY-SA 2.0); Kaisendon.jpg (CC BY-SA 4.0); Traditional wedding at Meiji-jingu, 2006-10-29.jpg (CC BY-SA 2.0); Takeshita Dori, Harajuku (44191369751).jpg (CC BY 2.0); Shibuya scramble av night from Stream.jpg (CC0); Marion Crêpes in Harajuku Takeshita 2.jpg (CC0); Pork loin cutlet set meal of Katsuya.jpg (CC0); Conveyor belt sushi at Mashiro Sushi.jpg (CC BY-SA 4.0), via Wikimedia Commons.</p></footer>
+<footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p><p>Photos: Sensoji0387.jpg (Public domain); Tokyo Cruise Ship Himiko.jpg (CC BY-SA 3.0); Tokio Hamarikyu-Garten-20091017-RM-141110.jpg (CC BY-SA 4.0); Rice bowl topped with shrimp tempura (8281030764).jpg (CC BY-SA 2.0); Kajikaso Dinner Sukiyaki.JPG (CC BY-SA 4.0); 和牛 屋台 2015 (31948446406).jpg (CC BY 2.0); Photos at teamlab planets tokyo.jpg (CC BY-SA 4.0); Japan 2024-04-28 (53893216070).jpg (CC BY 2.0); Kaisen-don (8126073697).jpg (CC BY 2.0); 010 Sushi master in Kyoto, Japan - sushi chef 寿司職人.jpg (CC BY 3.0); Panfried Salmon Nigiri - Shira Nui AUD4.50 each (4759206623).jpg (CC BY-SA 2.0); Kaisendon.jpg (CC BY-SA 4.0); Traditional wedding at Meiji-jingu, 2006-10-29.jpg (CC BY-SA 2.0); Takeshita Dori, Harajuku (44191369751).jpg (CC BY 2.0); Shibuya scramble av night from Stream.jpg (CC0); Marion Crêpes in Harajuku Takeshita 2.jpg (CC0); Pork loin cutlet set meal of Katsuya.jpg (CC0); Conveyor belt sushi at Mashiro Sushi.jpg (CC BY-SA 4.0), via Wikimedia Commons.</p></footer>
 <script>
 (function(){
  var cards=[].slice.call(document.querySelectorAll('.mcard'));
@@ -142,12 +142,14 @@ footer{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','false')}
  function open_(id){var d=document.getElementById('detail-'+id);d.hidden=false;requestAnimationFrame(function(){d.classList.add('open')});
    document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','true')}
+ var want=(location.hash.match(/^#detail-([ABC])$/)||[])[1]||(location.search.match(/[?&]open=([ABC])/)||[])[1];
+ if(want){open_(want);setTimeout(function(){document.getElementById('detail-'+want).scrollIntoView()},80)}
  cards.forEach(function(b){
   b.addEventListener('click',function(){
    var id=b.dataset.course,was=b.getAttribute('aria-expanded')==='true';
    cards.forEach(function(o){if(o.getAttribute('aria-expanded')==='true')close(o.dataset.course)});
    if(was)return;
-   open_(id);
+   open_(id);history.replaceState(null,'','#detail-'+id);
    setTimeout(function(){document.getElementById('detail-'+id).scrollIntoView({behavior:'smooth',block:'start'})},60);
   });
  });
