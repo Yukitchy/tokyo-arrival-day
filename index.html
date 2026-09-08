@@ -34,7 +34,7 @@ header{padding:56px 0 30px} header p{font-size:18px;color:var(--mute);margin:0;m
 .detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:14px;position:relative}
 .detail[hidden]{display:none} .detail.open{grid-template-rows:1fr}
 .dwrap{overflow:hidden;min-height:0;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);position:relative}
-.detail::before{content:'';position:absolute;top:-11px;left:var(--arrow,50%);width:20px;height:20px;margin-left:-10px;background:var(--card);border-left:2px solid var(--ink);border-top:2px solid var(--ink);transform:rotate(45deg);z-index:2;opacity:0;transition:opacity .2s .12s}
+.detail::before{content:'';position:absolute;top:-11px;left:var(--arrow,50%);width:20px;height:20px;margin-left:-10px;background:var(--acc);border-left:2px solid var(--acc);border-top:2px solid var(--acc);transform:rotate(45deg);z-index:2;opacity:0;transition:opacity .2s .12s}
 .detail.open::before{opacity:1}
 .dtop{height:5px;background:var(--acc)}
 .detail.open .dwrap{overflow:visible}
