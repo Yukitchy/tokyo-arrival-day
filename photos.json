@@ -1,0 +1,71 @@
+{
+ "A": [
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Sensoji0387.jpg/960px-Sensoji0387.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Sensoji0387.jpg",
+   "lic": "Public domain",
+   "score": 9,
+   "note": "仲見世を着物の人たちが歩いている・人が主役"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Tokyo_Cruise_Ship_Himiko.jpg/960px-Tokyo_Cruise_Ship_Himiko.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Tokyo Cruise Ship Himiko.jpg",
+   "lic": "CC BY-SA 3.0",
+   "score": 7,
+   "note": "未来的な水上バス「ヒミコ」・コースの目玉"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg/960px-Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Rice bowl topped with shrimp tempura (8281030764).jpg",
+   "lic": "CC BY-SA 2.0",
+   "score": 8,
+   "note": "天丼と味噌汁・昼の絵が具体的になる"
+  }
+ ],
+ "B": [
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Photos_at_teamlab_planets_tokyo.jpg/960px-Photos_at_teamlab_planets_tokyo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Photos at teamlab planets tokyo.jpg",
+   "lic": "CC BY-SA 4.0",
+   "score": 10,
+   "note": "虹色の水の中を歩く人が写っている・teamLabの体験そのもの"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG/960px-Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Toyosu Senkyaku Banrai 2F Edomae Plaza 2024.JPG",
+   "lic": "CC BY 4.0",
+   "score": 8,
+   "note": "千客万来の赤い傘と行き交う人"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG/960px-Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Toyosu Senkyaku Banrai 3F Food Court 2024.JPG",
+   "lic": "CC BY 4.0",
+   "score": 7,
+   "note": "カウンターで食べている人たち"
+  }
+ ],
+ "C": [
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg/960px-Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Traditional wedding at Meiji-jingu, 2006-10-29.jpg",
+   "lic": "CC BY-SA 2.0",
+   "score": 10,
+   "note": "明治神宮の結婚式の行列・赤い傘と着物。日曜の朝に実際に見られる"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg/960px-Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Takeshita Dori, Harajuku (44191369751).jpg",
+   "lic": "CC BY 2.0",
+   "score": 9,
+   "note": "マリオンクレープの店頭に人だかり"
+  },
+  {
+   "thumb": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Shibuya_scramble_av_night_from_Stream.jpg/960px-Shibuya_scramble_av_night_from_Stream.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "title": "Shibuya scramble av night from Stream.jpg",
+   "lic": "CC0",
+   "score": 8,
+   "note": "スクランブル交差点を上から・渡る人が見える"
+  }
+ ]
+}

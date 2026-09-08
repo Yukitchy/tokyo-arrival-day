@@ -2,12 +2,9 @@
 """Katz家(12/21)向け 到着日コース選択ページ。 python3 build.py -> index.html"""
 import json, html
 
-C = json.load(open('commons.json'))
-def pick(k, i):
-    x = C[k][i]; return x['thumb'], x['t'].replace('File:', ''), x['lic']
-P = {'sensoji':pick('sensoji',0),'cruise':pick('cruise',1),'hama':pick('hamarikyu',0),
-     'teamlab':pick('teamlab',0),'toyosu':pick('toyosu',0),'yokocho':pick('toyosu',3),
-     'meiji':pick('meiji',1),'takeshita':pick('takeshita2',1),'shibuya':pick('shibuya',2)}
+# 写真は「ワクワク採点」で選ぶ。建物の外観でなく、そこで人が楽しんでいる絵を最優先。
+# 採点と選定理由は photos.json の score / note を見る。
+PH = json.load(open('photos.json'))
 gm = lambda q: 'https://www.google.com/maps/search/?api=1&query=' + q.replace(' ', '+')
 emb = lambda q: 'https://maps.google.com/maps?q=' + q.replace(' ', '+') + '&output=embed&z=12'
 def route_emb(stops):
@@ -20,7 +17,6 @@ def route_link(stops):
 
 COURSES = [
  dict(id='A', name='Asakusa & the river', tag='Sit down and see Tokyo',
-  photos=['sensoji','cruise','hama'],
   why='The lowest-walking option. Half of the tour is spent sitting on a boat, so a jet-lagged family can still enjoy it.',
   steps=[('9:00','Leave the hotel','Taxi or train to Asakusa while the streets are still quiet. About 30 minutes from central Tokyo.'),
          ('9:20','Senso-ji temple and Nakamise street','Tokyo&rsquo;s oldest temple. Photos at the big red lantern, incense smoke, first snacks of the trip. The pier is a 5-minute walk from the temple.'),
@@ -37,7 +33,6 @@ COURSES = [
   mind='December river wind is cold, so bring layers. Boat times for Dec 21 to be confirmed.',
   links=[('Senso-ji (official)','https://www.senso-ji.jp/english/'),('Tokyo Cruise (official)','https://www.suijobus.co.jp/en/'),('Hama-rikyu gardens','https://www.tokyo-park.or.jp/teien/en/hama-rikyu/')]),
  dict(id='B', name='teamLab Planets & Toyosu', tag='Indoor wow, one place only',
-  photos=['teamlab','toyosu','yokocho'],
   why='One venue for the whole morning, then lunch next door. Nothing depends on the weather, and the water rooms wake everyone up.',
   steps=[('9:00','Leave the hotel','Train or taxi to Toyosu. About 25 minutes from central Tokyo.'),
          ('9:30','teamLab Planets, about 2 hours','Barefoot digital art museum. You walk through water and light, and the rooms react to you.'),
@@ -51,9 +46,8 @@ COURSES = [
         ('Mekiki Yokocho, Senkyaku Banrai','Toyosu · food street','Twenty small shops under one roof: rice bowls, grilled seafood, wagyu skewers, ice cream. Easiest with five people and different appetites.','Toyosu Senkyaku Banrai Mekiki Yokocho')],
   good='Weatherproof. Only two moves all morning. The single most memorable spot for kids.',
   mind='December tickets sell out, so we book early. You get wet up to the knees, and shorts are provided. Bright immersive rooms can be a lot for a very tired child.',
-  links=[('teamLab Planets (official)','https://www.teamlab.art/e/planets/'),('Toyosu Senkyaku Banrai (official)','https://toyosu-senkyakubanrai.jp/')]),
+  links=[('teamLab Planets (official)','https://www.teamlab.art/e/planets/'),('Watch the rooms in motion (teamLab official channel)','https://www.youtube.com/@teamLabART'),('Toyosu Senkyaku Banrai (official)','https://toyosu-senkyakubanrai.jp/')]),
  dict(id='C', name='Meiji shrine, Harajuku & Shibuya', tag='Morning light to reset jet lag',
-  photos=['meiji','takeshita','shibuya'],
   why='Daylight is the fastest jet-lag fix. A quiet forest walk first, then the colourful side of Tokyo once the family is properly awake.',
   steps=[('9:00','Leave the hotel','Train or taxi to Harajuku. About 20 minutes from central Tokyo.'),
          ('9:20','Meiji Jingu shrine','A flat walk through a forest in the middle of the city, benches along the way. Sunday mornings are calm.'),
@@ -72,7 +66,7 @@ COURSES = [
 ]
 
 def card(c):
-    ph = ''.join(f'<img src="{P[k][0]}" alt="{html.escape(P[k][1])}" loading="lazy">' for k in c['photos'])
+    ph = ''.join(f'<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">' for x in PH[c['id']])
     st = ''.join(f'<li><b>{t}</b><div><strong>{h}</strong><span>{d}</span></div></li>' for t, h, d in c['steps'])
     fd = ''.join(f'<a class="eat" href="{gm(q)}" target="_blank" rel="noopener"><strong>{n}</strong>'
                  f'<em>{a}</em><span>{d}</span><i>Open in Google Maps ↗</i></a>' for n, a, d, q in c['food'])
@@ -95,7 +89,7 @@ def card(c):
 <a class="choose" href="mailto:icchan417@gmail.com?subject={html.escape(sub)}">Choose course {c['id']}</a>
 </div></section>'''
 
-credits = '; '.join(f'{html.escape(v[1])} ({v[2]})' for v in P.values())
+credits = '; '.join(html.escape(x['title']) + ' (' + x['lic'] + ')' for v in PH.values() for x in v)
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokyo, arrival day: three courses for the Katz family</title><meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
