@@ -210,6 +210,9 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
  }});
 }})();
 </script>
-<script src="devbar.js?v=2"></script></body></html>'''
-open('index.html', 'w').write(page)
-print('written', len(page))
+{DEVBAR}</body></html>'''
+open('index.html', 'w').write(page.replace('{DEVBAR}', ''))
+open('preview.html', 'w').write(page.replace(
+    '{DEVBAR}',
+    '<script>window.DEVBAR_FORCE=1</script><script src="devbar.js?v=3"></script>'))
+print('written', len(page), '-> index.html + preview.html')

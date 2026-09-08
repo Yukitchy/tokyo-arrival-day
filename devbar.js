@@ -23,7 +23,7 @@
     else if (q.has('dev')) { localStorage.setItem('devbar', '1'); }
     sticky = localStorage.getItem('devbar') === '1';
   } catch (e) {}
-  if (!isLocal && !q.has('dev') && !sticky) return;
+  if (!isLocal && !q.has('dev') && !sticky && !window.DEVBAR_FORCE) return;
 
   var DEVICES = {
     sp: { w: 390, h: 844, label: 'iPhone 390×844' },
