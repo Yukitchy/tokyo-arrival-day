@@ -177,8 +177,8 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
 }}
 @media(max-width:560px){{
  .wrap{{padding:0 18px}}
- header{{padding:26px 0 18px}}
- h1{{font-size:31px;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}}
+ header{{padding:48px 0 24px}} .kicker{{margin-bottom:14px}}
+ h1{{font-size:31px;line-height:1.1;letter-spacing:-.03em;margin-bottom:14px}}
  header p{{font-size:16px;line-height:1.55;max-width:none}}
  .facts{{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin-top:16px;font-size:13px;line-height:1.5}}
  .facts li{{display:contents}} .facts b{{white-space:nowrap}}
