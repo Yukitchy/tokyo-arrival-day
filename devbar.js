@@ -16,7 +16,14 @@
 
   var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) ||
                 location.protocol === 'file:';
-  if (!isLocal && !q.has('dev')) return;
+  // ?dev=1 sticks to this browser so Yuuki does not have to retype it; ?dev=0 turns it off.
+  var sticky = false;
+  try {
+    if (q.get('dev') === '0') { localStorage.removeItem('devbar'); }
+    else if (q.has('dev')) { localStorage.setItem('devbar', '1'); }
+    sticky = localStorage.getItem('devbar') === '1';
+  } catch (e) {}
+  if (!isLocal && !q.has('dev') && !sticky) return;
 
   var DEVICES = {
     sp: { w: 390, h: 844, label: 'iPhone 390×844' },
