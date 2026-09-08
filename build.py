@@ -16,7 +16,7 @@ def route_link(stops):
             + ('&waypoints=' + '%7C'.join(s[1:-1]) if len(s) > 2 else '') + '&travelmode=transit')
 
 COURSES = [
- dict(id='A', name='Asakusa & the river', tag='Sit down and see Tokyo',
+ dict(id='A', chips=['Least walking','40 minutes on a boat','No tickets needed'], name='Asakusa & the river', tag='Sit down and see Tokyo',
   why='The lowest-walking option. Half of the tour is spent sitting on a boat, so a jet-lagged family can still enjoy it.',
   steps=[('9:00','Leave the hotel','Taxi or train to Asakusa while the streets are still quiet. About 30 minutes from central Tokyo.'),
          ('9:20','Senso-ji temple and Nakamise street','Tokyo&rsquo;s oldest temple. Photos at the big red lantern, incense smoke, first snacks of the trip. The pier is a 5-minute walk from the temple.'),
@@ -32,7 +32,7 @@ COURSES = [
   good='Little walking. Works at any energy level. Great photos.',
   mind='December river wind is cold, so bring layers. Boat times for Dec 21 to be confirmed.',
   links=[('Senso-ji (official)','https://www.senso-ji.jp/english/'),('Tokyo Cruise (official)','https://www.suijobus.co.jp/en/'),('Hama-rikyu gardens','https://www.tokyo-park.or.jp/teien/en/hama-rikyu/')]),
- dict(id='B', name='teamLab Planets & Toyosu', tag='Indoor wow, one place only',
+ dict(id='B', chips=['Indoor, any weather','One place all morning','Tickets needed'], name='teamLab Planets & Toyosu', tag='Indoor wow, one place only',
   why='One venue for the whole morning, then lunch next door. Nothing depends on the weather, and the water rooms wake everyone up.',
   steps=[('9:00','Leave the hotel','Train or taxi to Toyosu. About 25 minutes from central Tokyo.'),
          ('9:30','teamLab Planets, about 2 hours','Barefoot digital art museum. You walk through water and light, and the rooms react to you.'),
@@ -47,7 +47,7 @@ COURSES = [
   good='Weatherproof. Only two moves all morning. The single most memorable spot for kids.',
   mind='December tickets sell out, so we book early. You get wet up to the knees, and shorts are provided. Bright immersive rooms can be a lot for a very tired child.',
   links=[('teamLab Planets (official)','https://www.teamlab.art/e/planets/'),('Watch the rooms in motion (teamLab official channel)','https://www.youtube.com/@teamLabART'),('Toyosu Senkyaku Banrai (official)','https://toyosu-senkyakubanrai.jp/')]),
- dict(id='C', name='Meiji shrine, Harajuku & Shibuya', tag='Morning light to reset jet lag',
+ dict(id='C', chips=['Best for jet lag','Outdoors, no tickets','Most photogenic'], name='Meiji shrine, Harajuku & Shibuya', tag='Morning light to reset jet lag',
   why='Daylight is the fastest jet-lag fix. A quiet forest walk first, then the colourful side of Tokyo once the family is properly awake.',
   steps=[('9:00','Leave the hotel','Train or taxi to Harajuku. About 20 minutes from central Tokyo.'),
          ('9:20','Meiji Jingu shrine','A flat walk through a forest in the middle of the city, benches along the way. Sunday mornings are calm.'),
@@ -65,25 +65,32 @@ COURSES = [
   links=[('Meiji Jingu (official)','https://www.meijijingu.or.jp/en/'),('Takeshita street','https://www.google.com/maps/search/?api=1&query=Takeshita+Street+Harajuku'),('Shibuya crossing','https://www.google.com/maps/search/?api=1&query=Shibuya+Scramble+Crossing')]),
 ]
 
-def card(c):
-    ph = ''.join(f'<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">' for x in PH[c['id']])
+def menu(c):
+    x = PH[c['id']][0]
+    ch = ''.join(f'<li>{html.escape(t)}</li>' for t in c['chips'])
+    return f'''<button class="mcard" type="button" data-course="{c['id']}" aria-expanded="false" aria-controls="detail-{c['id']}">
+<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">
+<span class="mb"><span class="mk">Course {c['id']}</span><span class="mt">{html.escape(c['name'])}</span>
+<span class="mtag">{html.escape(c['tag'])}</span><ul class="mch">{ch}</ul><span class="mopen">See the plan</span></span></button>'''
+
+def detail(c):
+    ph = ''.join(f'<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">' for x in PH[c['id']][1:])
     st = ''.join(f'<li><b>{t}</b><div><strong>{h}</strong><span>{d}</span></div></li>' for t, h, d in c['steps'])
     fd = ''.join(f'<a class="eat" href="{gm(q)}" target="_blank" rel="noopener"><strong>{n}</strong>'
                  f'<em>{a}</em><span>{d}</span><i>Open in Google Maps ↗</i></a>' for n, a, d, q in c['food'])
     ln = ' '.join(f'<a href="{u}" target="_blank" rel="noopener">{html.escape(t)} ↗</a>' for t, u in c['links'])
     sub = f'Dec 21 tour: we choose course {c["id"]} ({c["name"]})'
-    return f'''<section class="course" id="course-{c['id']}">
-<div class="photos">{ph}</div>
-<div class="body">
-<p class="kicker">Course {c['id']} · {html.escape(c['tag'])}</p>
-<h2>{html.escape(c['name'])}</h2>
+    return f'''<section class="detail" id="detail-{c['id']}" hidden><div class="dwrap">
+<div class="dhead"><div><p class="kicker">Course {c['id']} · {html.escape(c['tag'])}</p><h2>{html.escape(c['name'])}</h2></div>
+<button class="dclose" type="button" aria-label="Close">Close ✕</button></div>
 <p class="why">{html.escape(c['why'])}</p>
-<ol class="steps">{st}</ol>
-<h3>The route</h3>
-<div class="mapbox"><iframe src="{route_emb(c['stops'])}" loading="lazy" title="Route for course {c['id']}" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-<p class="moves">{c['moves']} <a href="{route_link(c['stops'])}" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p>
-<h3>Where we eat</h3>
-<div class="eats">{fd}</div>
+<div class="photos">{ph}</div>
+<div class="dgrid">
+<div><h3>The day</h3><ol class="steps">{st}</ol></div>
+<div><h3>The route</h3><div class="mapbox"><iframe src="{route_emb(c['stops'])}" loading="lazy" title="Route for course {c['id']}" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<p class="moves">{c['moves']} <a href="{route_link(c['stops'])}" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p></div>
+</div>
+<h3>Where we eat</h3><div class="eats">{fd}</div>
 <div class="notes"><p><b>Good for</b> {html.escape(c['good'])}</p><p><b>Keep in mind</b> {html.escape(c['mind'])}</p></div>
 <p class="links">{ln}</p>
 <a class="choose" href="mailto:icchan417@gmail.com?subject={html.escape(sub)}">Choose course {c['id']}</a>
@@ -96,63 +103,106 @@ page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name
 <style>
 :root{{--bg:#faf7f1;--card:#fff;--ink:#221f1b;--mute:#6b655c;--line:#e8e2d7;--acc:#2f6b4f;--r:18px}}
 *{{box-sizing:border-box;min-width:0}} html,body{{overflow-x:hidden;max-width:100%}} img{{max-width:100%}}
-body{{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}}
-.wrap{{max-width:1040px;margin:0 auto;padding:0 20px}}
-.disp{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:0;line-height:1.08}}
-header{{padding:64px 0 34px}}
-header .kicker{{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}}
-h1{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(38px,6.4vw,64px);line-height:1.04;margin:0 0 18px;letter-spacing:-.005em}}
-header p{{font-size:18px;color:var(--mute);margin:0;max-width:660px}}
-.facts{{display:flex;flex-wrap:wrap;gap:8px 22px;margin:24px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)}} .facts b{{color:var(--ink);font-weight:600}}
-h3{{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:34px 0 14px}}
-.arrival{{padding:34px 0 40px;border-top:1px solid var(--line)}}
-.arrival .grid{{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}}
-.arrival p{{margin:0 0 12px;font-size:17px}} .arrival .hint{{color:var(--mute);font-size:15px}}
-.mapbox{{position:relative;border-radius:var(--r);overflow:hidden;background:#efe9df}}
-.mapbox iframe{{display:block;width:100%;height:320px;border:0}}
-.course{{padding:44px 0 52px;border-top:1px solid var(--line)}}
-.photos{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:26px;width:100%}}
-.photos img{{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);background:#efe9df}}
-.kicker{{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}}
-h2{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.4vw,52px);line-height:1.05;margin:0 0 14px;letter-spacing:-.005em}}
-.why{{font-size:18px;margin:0 0 26px;max-width:700px;color:var(--mute)}}
+body{{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}}
+.wrap{{max-width:1080px;margin:0 auto;padding:0 20px}}
+.kicker{{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}}
+h1{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,6vw,60px);line-height:1.04;margin:0 0 16px}}
+h2{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(32px,4.6vw,46px);line-height:1.05;margin:0}}
+h3{{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}}
+header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
+.facts{{display:flex;flex-wrap:wrap;gap:6px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)}} .facts b{{color:var(--ink);font-weight:600}}
+.sechead{{display:flex;align-items:baseline;gap:14px;padding:26px 0 16px;border-top:1px solid var(--line)}}
+.sechead .n{{font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--acc)}}
+.sechead b{{font-size:19px;font-weight:600}} .sechead span{{font-size:14px;color:var(--mute)}}
+.menu{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+.mcard{{display:block;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;padding:0;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}}
+.mcard:hover{{transform:translateY(-3px);box-shadow:0 10px 24px rgba(34,31,27,.10)}}
+.mcard[aria-expanded=true]{{border-color:var(--ink);box-shadow:0 10px 24px rgba(34,31,27,.14)}}
+.mcard>img{{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#efe9df}}
+.mb{{display:block;padding:18px 20px 20px}}
+.mk{{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}}
+.mt{{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:29px;line-height:1.08;margin-bottom:6px}}
+.mtag{{display:block;font-size:15px;color:var(--mute);margin-bottom:12px}}
+.mch{{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px}}
+.mch li{{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--mute)}}
+.mopen{{display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
+.mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
+.detail{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:16px}}
+.detail[hidden]{{display:none}} .detail.open{{grid-template-rows:1fr}}
+.dwrap{{overflow:hidden;min-height:0;background:var(--card);border-radius:var(--r)}}
+.detail.open .dwrap{{overflow:visible}}
+.dwrap>*{{margin-left:26px;margin-right:26px}} .dwrap>.photos{{margin-left:26px;margin-right:26px}}
+.dhead{{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:26px}}
+.dclose{{flex:none;font:inherit;font-size:13px;font-weight:600;color:var(--mute);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}}
+.dclose:hover{{color:var(--ink);border-color:var(--ink)}}
+.why{{font-size:17px;color:var(--mute);margin:10px 0 20px;max-width:640px}}
+.photos{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:26px}}
+.photos img{{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:#efe9df}}
+.dgrid{{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:28px}}
 .steps{{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}}
-.steps li{{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}}
-.steps b{{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:15px}} .steps strong{{display:block;font-weight:600;font-size:17px}} .steps span{{color:var(--mute);font-size:15px}}
-.moves{{font-size:15px;color:var(--mute);margin:12px 0 0}} .moves a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}}
-.eats{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
-.eat{{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--r);padding:20px 22px;transition:transform .15s}}
-.eat:hover{{transform:translateY(-2px)}}
-.eat strong{{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.15}}
-.eat em{{display:block;font-style:normal;font-size:12px;color:var(--acc);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 10px}}
-.eat span{{display:block;font-size:15px;color:var(--mute)}} .eat i{{display:block;font-style:normal;font-size:13px;margin-top:12px;text-decoration:underline;text-underline-offset:3px}}
-.notes{{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 22px;font-size:15px}} .notes p{{margin:0;padding:18px 20px;background:var(--card);border-radius:var(--r)}} .notes b{{display:block;font-weight:600;margin-bottom:4px}}
-.links{{margin:0 0 26px;font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px}} .links a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
-.choose{{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:16px 32px;border-radius:999px;font-size:16px}} .choose:hover{{background:#3c3630}}
-footer{{padding:36px 0 70px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}} footer p{{margin:0 0 6px}}
-@media(max-width:700px){{
- header{{padding:40px 0 26px}} .arrival .grid{{grid-template-columns:1fr}}
- .photos{{grid-template-columns:1fr 1fr}} .photos img:first-child{{grid-column:span 2;aspect-ratio:16/9}}
- .eats{{grid-template-columns:1fr}} .notes{{grid-template-columns:1fr}} .mapbox iframe{{height:250px}}
+.steps li{{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}}
+.steps b{{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:14px}} .steps strong{{display:block;font-weight:600;font-size:16px}} .steps span{{color:var(--mute);font-size:14px}}
+.mapbox{{border-radius:12px;overflow:hidden;background:#efe9df}} .mapbox iframe{{display:block;width:100%;height:300px;border:0}}
+.moves{{font-size:14px;color:var(--mute);margin:12px 0 0}} .moves a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}}
+.eats{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:26px}}
+.eat{{display:block;text-decoration:none;color:inherit;background:var(--bg);border-radius:12px;padding:18px 20px}}
+.eat:hover{{outline:1px solid var(--ink)}}
+.eat strong{{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:22px;line-height:1.15}}
+.eat em{{display:block;font-style:normal;font-size:11px;color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:5px 0 9px}}
+.eat span{{display:block;font-size:14px;color:var(--mute)}} .eat i{{display:block;font-style:normal;font-size:12px;margin-top:10px;text-decoration:underline;text-underline-offset:3px}}
+.notes{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px}} .notes p{{margin:0;padding:16px 18px;background:var(--bg);border-radius:12px}} .notes b{{display:block;font-weight:600;margin-bottom:3px}}
+.links{{margin:0 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}} .links a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
+.choose{{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:15px 30px;border-radius:999px;font-size:16px;margin-bottom:28px}} .choose:hover{{background:#3c3630}}
+.arrival{{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;padding-bottom:40px}}
+.arrival p{{margin:0 0 10px;font-size:16px}} .arrival .hint{{color:var(--mute);font-size:15px}}
+.arrival .mapbox iframe{{height:260px}}
+footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}} footer p{{margin:0 0 6px}}
+@media(max-width:820px){{
+ header{{padding:36px 0 22px}} .menu{{grid-template-columns:1fr}} .mcard>img{{aspect-ratio:16/9}}
+ .dgrid,.eats,.notes,.arrival,.photos{{grid-template-columns:1fr}}
+ .dwrap>*{{margin-left:18px;margin-right:18px}} .mapbox iframe{{height:230px}}
 }}
 </style></head><body>
-<header><div class="wrap">
+<header class="wrap">
 <p class="kicker">Tokyo · Sunday, December 21</p>
-<h1>Arrival day, done gently.<br>Three courses, pick one.</h1>
-<p>You land at Haneda at 5:10 in the morning. Each course starts at your hotel at 9:00 and has you back by 14:00 for a nap. Little walking, plenty of sitting, good food, and one thing worth remembering.</p>
+<h1>Arrival day, done gently.</h1>
+<p>You land at Haneda at 5:10 in the morning. Every course starts at your hotel at 9:00 and has you back by 14:00 for a nap. Little walking, plenty of sitting, and one thing worth remembering.</p>
 <ul class="facts"><li><b>Guide</b> Yuuki</li><li><b>Time</b> 9:00–14:00</li><li><b>Group</b> family of five</li><li><b>Start and end</b> your hotel</li></ul>
-</div></header>
-<section class="arrival"><div class="wrap">
-<h3 style="margin-top:0">From the airport</h3>
-<div class="grid">
-<div>
-<p>Haneda sits south of the city, about 30 to 45 minutes from central Tokyo by train or taxi. All three courses stay inside the ring shown on the map, so nothing is far from your hotel.</p>
-<p class="hint">Tell me the hotel name and I will pin it here, with the exact door-to-door times for the course you choose. If one room is ready early, you can drop the bags and start light.</p>
-</div>
+</header>
+<div class="wrap">
+<div class="sechead"><span class="n">1</span><div><b>Pick a course</b> <span>Tap one to see the plan, the route and where we eat.</span></div></div>
+<div class="menu">{''.join(menu(c) for c in COURSES)}</div>
+{''.join(detail(c) for c in COURSES)}
+<div class="sechead"><span class="n">2</span><div><b>From the airport</b> <span>Haneda is 30 to 45 minutes from central Tokyo.</span></div></div>
+<div class="arrival">
+<div><p>All three courses stay close to the middle of the city, so nothing is far from your hotel.</p>
+<p class="hint">Tell me the hotel name and I will pin it here, with the exact door-to-door times for the course you choose. If one room is ready early, you can drop the bags and start light.</p></div>
 <div class="mapbox"><iframe src="{emb('Haneda Airport Tokyo')}" loading="lazy" title="Haneda airport and central Tokyo" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-</div></div></section>
-<main class="wrap">{''.join(card(c) for c in COURSES)}</main>
+</div>
+</div>
 <footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p><p>Photos: {credits}, via Wikimedia Commons.</p></footer>
+<script>
+(function(){{
+ var cards=[].slice.call(document.querySelectorAll('.mcard'));
+ function close(id){{var d=document.getElementById('detail-'+id);d.classList.remove('open');setTimeout(function(){{if(!d.classList.contains('open'))d.hidden=true}},320);
+   document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','false')}}
+ function open_(id){{var d=document.getElementById('detail-'+id);d.hidden=false;requestAnimationFrame(function(){{d.classList.add('open')}});
+   document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','true')}}
+ cards.forEach(function(b){{
+  b.addEventListener('click',function(){{
+   var id=b.dataset.course,was=b.getAttribute('aria-expanded')==='true';
+   cards.forEach(function(o){{if(o.getAttribute('aria-expanded')==='true')close(o.dataset.course)}});
+   if(was)return;
+   open_(id);
+   setTimeout(function(){{document.getElementById('detail-'+id).scrollIntoView({{behavior:'smooth',block:'start'}})}},60);
+  }});
+ }});
+ document.querySelectorAll('.dclose').forEach(function(x){{
+  x.addEventListener('click',function(){{var d=x.closest('.detail'),id=d.id.replace('detail-','');close(id);
+   document.querySelector('.mcard[data-course="'+id+'"]').scrollIntoView({{behavior:'smooth',block:'center'}})}});
+ }});
+}})();
+</script>
 <script src="devbar.js"></script></body></html>'''
 open('index.html', 'w').write(page)
 print('written', len(page))

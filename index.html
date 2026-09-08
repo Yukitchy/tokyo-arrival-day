@@ -4,106 +4,155 @@
 <style>
 :root{--bg:#faf7f1;--card:#fff;--ink:#221f1b;--mute:#6b655c;--line:#e8e2d7;--acc:#2f6b4f;--r:18px}
 *{box-sizing:border-box;min-width:0} html,body{overflow-x:hidden;max-width:100%} img{max-width:100%}
-body{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-.disp{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:0;line-height:1.08}
-header{padding:64px 0 34px}
-header .kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
-h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(38px,6.4vw,64px);line-height:1.04;margin:0 0 18px;letter-spacing:-.005em}
-header p{font-size:18px;color:var(--mute);margin:0;max-width:660px}
-.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:24px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)} .facts b{color:var(--ink);font-weight:600}
-h3{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:34px 0 14px}
-.arrival{padding:34px 0 40px;border-top:1px solid var(--line)}
-.arrival .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-.arrival p{margin:0 0 12px;font-size:17px} .arrival .hint{color:var(--mute);font-size:15px}
-.mapbox{position:relative;border-radius:var(--r);overflow:hidden;background:#efe9df}
-.mapbox iframe{display:block;width:100%;height:320px;border:0}
-.course{padding:44px 0 52px;border-top:1px solid var(--line)}
-.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:26px;width:100%}
-.photos img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);background:#efe9df}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
-h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.4vw,52px);line-height:1.05;margin:0 0 14px;letter-spacing:-.005em}
-.why{font-size:18px;margin:0 0 26px;max-width:700px;color:var(--mute)}
+body{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,6vw,60px);line-height:1.04;margin:0 0 16px}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(32px,4.6vw,46px);line-height:1.05;margin:0}
+h3{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+header{padding:56px 0 30px} header p{font-size:18px;color:var(--mute);margin:0;max-width:620px}
+.facts{display:flex;flex-wrap:wrap;gap:6px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)} .facts b{color:var(--ink);font-weight:600}
+.sechead{display:flex;align-items:baseline;gap:14px;padding:26px 0 16px;border-top:1px solid var(--line)}
+.sechead .n{font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--acc)}
+.sechead b{font-size:19px;font-weight:600} .sechead span{font-size:14px;color:var(--mute)}
+.menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mcard{display:block;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;padding:0;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
+.mcard:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(34,31,27,.10)}
+.mcard[aria-expanded=true]{border-color:var(--ink);box-shadow:0 10px 24px rgba(34,31,27,.14)}
+.mcard>img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#efe9df}
+.mb{display:block;padding:18px 20px 20px}
+.mk{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+.mt{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:29px;line-height:1.08;margin-bottom:6px}
+.mtag{display:block;font-size:15px;color:var(--mute);margin-bottom:12px}
+.mch{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.mch li{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--mute)}
+.mopen{display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}
+.mcard[aria-expanded=true] .mopen::after{content:" ▲"} .mcard[aria-expanded=false] .mopen::after{content:" ▾"}
+.detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:16px}
+.detail[hidden]{display:none} .detail.open{grid-template-rows:1fr}
+.dwrap{overflow:hidden;min-height:0;background:var(--card);border-radius:var(--r)}
+.detail.open .dwrap{overflow:visible}
+.dwrap>*{margin-left:26px;margin-right:26px} .dwrap>.photos{margin-left:26px;margin-right:26px}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:26px}
+.dclose{flex:none;font:inherit;font-size:13px;font-weight:600;color:var(--mute);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.dclose:hover{color:var(--ink);border-color:var(--ink)}
+.why{font-size:17px;color:var(--mute);margin:10px 0 20px;max-width:640px}
+.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:26px}
+.photos img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:#efe9df}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:28px}
 .steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.steps li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
-.steps b{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:15px} .steps strong{display:block;font-weight:600;font-size:17px} .steps span{color:var(--mute);font-size:15px}
-.moves{font-size:15px;color:var(--mute);margin:12px 0 0} .moves a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-.eats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.eat{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--r);padding:20px 22px;transition:transform .15s}
-.eat:hover{transform:translateY(-2px)}
-.eat strong{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.15}
-.eat em{display:block;font-style:normal;font-size:12px;color:var(--acc);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 10px}
-.eat span{display:block;font-size:15px;color:var(--mute)} .eat i{display:block;font-style:normal;font-size:13px;margin-top:12px;text-decoration:underline;text-underline-offset:3px}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 22px;font-size:15px} .notes p{margin:0;padding:18px 20px;background:var(--card);border-radius:var(--r)} .notes b{display:block;font-weight:600;margin-bottom:4px}
-.links{margin:0 0 26px;font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px} .links a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.choose{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:16px 32px;border-radius:999px;font-size:16px} .choose:hover{background:#3c3630}
-footer{padding:36px 0 70px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)} footer p{margin:0 0 6px}
-@media(max-width:700px){
- header{padding:40px 0 26px} .arrival .grid{grid-template-columns:1fr}
- .photos{grid-template-columns:1fr 1fr} .photos img:first-child{grid-column:span 2;aspect-ratio:16/9}
- .eats{grid-template-columns:1fr} .notes{grid-template-columns:1fr} .mapbox iframe{height:250px}
+.steps li{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.steps b{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:14px} .steps strong{display:block;font-weight:600;font-size:16px} .steps span{color:var(--mute);font-size:14px}
+.mapbox{border-radius:12px;overflow:hidden;background:#efe9df} .mapbox iframe{display:block;width:100%;height:300px;border:0}
+.moves{font-size:14px;color:var(--mute);margin:12px 0 0} .moves a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.eats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:26px}
+.eat{display:block;text-decoration:none;color:inherit;background:var(--bg);border-radius:12px;padding:18px 20px}
+.eat:hover{outline:1px solid var(--ink)}
+.eat strong{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:22px;line-height:1.15}
+.eat em{display:block;font-style:normal;font-size:11px;color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:5px 0 9px}
+.eat span{display:block;font-size:14px;color:var(--mute)} .eat i{display:block;font-style:normal;font-size:12px;margin-top:10px;text-decoration:underline;text-underline-offset:3px}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px} .notes p{margin:0;padding:16px 18px;background:var(--bg);border-radius:12px} .notes b{display:block;font-weight:600;margin-bottom:3px}
+.links{margin:0 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px} .links a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.choose{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:15px 30px;border-radius:999px;font-size:16px;margin-bottom:28px} .choose:hover{background:#3c3630}
+.arrival{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;padding-bottom:40px}
+.arrival p{margin:0 0 10px;font-size:16px} .arrival .hint{color:var(--mute);font-size:15px}
+.arrival .mapbox iframe{height:260px}
+footer{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)} footer p{margin:0 0 6px}
+@media(max-width:820px){
+ header{padding:36px 0 22px} .menu{grid-template-columns:1fr} .mcard>img{aspect-ratio:16/9}
+ .dgrid,.eats,.notes,.arrival,.photos{grid-template-columns:1fr}
+ .dwrap>*{margin-left:18px;margin-right:18px} .mapbox iframe{height:230px}
 }
 </style></head><body>
-<header><div class="wrap">
+<header class="wrap">
 <p class="kicker">Tokyo · Sunday, December 21</p>
-<h1>Arrival day, done gently.<br>Three courses, pick one.</h1>
-<p>You land at Haneda at 5:10 in the morning. Each course starts at your hotel at 9:00 and has you back by 14:00 for a nap. Little walking, plenty of sitting, good food, and one thing worth remembering.</p>
+<h1>Arrival day, done gently.</h1>
+<p>You land at Haneda at 5:10 in the morning. Every course starts at your hotel at 9:00 and has you back by 14:00 for a nap. Little walking, plenty of sitting, and one thing worth remembering.</p>
 <ul class="facts"><li><b>Guide</b> Yuuki</li><li><b>Time</b> 9:00–14:00</li><li><b>Group</b> family of five</li><li><b>Start and end</b> your hotel</li></ul>
-</div></header>
-<section class="arrival"><div class="wrap">
-<h3 style="margin-top:0">From the airport</h3>
-<div class="grid">
-<div>
-<p>Haneda sits south of the city, about 30 to 45 minutes from central Tokyo by train or taxi. All three courses stay inside the ring shown on the map, so nothing is far from your hotel.</p>
-<p class="hint">Tell me the hotel name and I will pin it here, with the exact door-to-door times for the course you choose. If one room is ready early, you can drop the bags and start light.</p>
-</div>
-<div class="mapbox"><iframe src="https://maps.google.com/maps?q=Haneda+Airport+Tokyo&output=embed&z=12" loading="lazy" title="Haneda airport and central Tokyo" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-</div></div></section>
-<main class="wrap"><section class="course" id="course-A">
-<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Sensoji0387.jpg/960px-Sensoji0387.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Sensoji0387.jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Tokyo_Cruise_Ship_Himiko.jpg/960px-Tokyo_Cruise_Ship_Himiko.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Tokyo Cruise Ship Himiko.jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg/960px-Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Rice bowl topped with shrimp tempura (8281030764).jpg" loading="lazy"></div>
-<div class="body">
-<p class="kicker">Course A · Sit down and see Tokyo</p>
-<h2>Asakusa &amp; the river</h2>
+</header>
+<div class="wrap">
+<div class="sechead"><span class="n">1</span><div><b>Pick a course</b> <span>Tap one to see the plan, the route and where we eat.</span></div></div>
+<div class="menu"><button class="mcard" type="button" data-course="A" aria-expanded="false" aria-controls="detail-A">
+<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Sensoji0387.jpg/960px-Sensoji0387.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Sensoji0387.jpg" loading="lazy">
+<span class="mb"><span class="mk">Course A</span><span class="mt">Asakusa &amp; the river</span>
+<span class="mtag">Sit down and see Tokyo</span><ul class="mch"><li>Least walking</li><li>40 minutes on a boat</li><li>No tickets needed</li></ul><span class="mopen">See the plan</span></span></button><button class="mcard" type="button" data-course="B" aria-expanded="false" aria-controls="detail-B">
+<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Photos_at_teamlab_planets_tokyo.jpg/960px-Photos_at_teamlab_planets_tokyo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Photos at teamlab planets tokyo.jpg" loading="lazy">
+<span class="mb"><span class="mk">Course B</span><span class="mt">teamLab Planets &amp; Toyosu</span>
+<span class="mtag">Indoor wow, one place only</span><ul class="mch"><li>Indoor, any weather</li><li>One place all morning</li><li>Tickets needed</li></ul><span class="mopen">See the plan</span></span></button><button class="mcard" type="button" data-course="C" aria-expanded="false" aria-controls="detail-C">
+<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg/960px-Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Traditional wedding at Meiji-jingu, 2006-10-29.jpg" loading="lazy">
+<span class="mb"><span class="mk">Course C</span><span class="mt">Meiji shrine, Harajuku &amp; Shibuya</span>
+<span class="mtag">Morning light to reset jet lag</span><ul class="mch"><li>Best for jet lag</li><li>Outdoors, no tickets</li><li>Most photogenic</li></ul><span class="mopen">See the plan</span></span></button></div>
+<section class="detail" id="detail-A" hidden><div class="dwrap">
+<div class="dhead"><div><p class="kicker">Course A · Sit down and see Tokyo</p><h2>Asakusa &amp; the river</h2></div>
+<button class="dclose" type="button" aria-label="Close">Close ✕</button></div>
 <p class="why">The lowest-walking option. Half of the tour is spent sitting on a boat, so a jet-lagged family can still enjoy it.</p>
-<ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Taxi or train to Asakusa while the streets are still quiet. About 30 minutes from central Tokyo.</span></div></li><li><b>9:20</b><div><strong>Senso-ji temple and Nakamise street</strong><span>Tokyo&rsquo;s oldest temple. Photos at the big red lantern, incense smoke, first snacks of the trip. The pier is a 5-minute walk from the temple.</span></div></li><li><b>10:40</b><div><strong>Sumida river cruise, about 40 minutes</strong><span>Everyone sits. Bridges, the skyline, Tokyo Skytree behind you. Kids can nap.</span></div></li><li><b>11:30</b><div><strong>Hama-rikyu gardens</strong><span>A short, flat walk in a 400-year-old garden. Tea house on the pond if energy allows.</span></div></li><li><b>12:30</b><div><strong>Lunch</strong><span>See the three picks below. Tsukiji is a 10-minute walk from the garden gate.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol>
-<h3>The route</h3>
-<div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Asakusa+Station+Tokyo&daddr=Sensoji+Temple+to:Asakusa+Pier+Tokyo+Cruise+to:Hamarikyu+Gardens+to:Tsukiji+Outer+Market&output=embed" loading="lazy" title="Route for course A" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-<p class="moves">Hotel → Asakusa about 30 min by train. Temple → pier 5 min on foot. Boat 40 min. Garden → Tsukiji 10 min on foot. Tsukiji → hotel about 20 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Asakusa+Station+Tokyo&destination=Tsukiji+Outer+Market&waypoints=Sensoji+Temple%7CAsakusa+Pier+Tokyo+Cruise%7CHamarikyu+Gardens&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p>
-<h3>Where we eat</h3>
-<div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Daikokuya+Tempura+Asakusa" target="_blank" rel="noopener"><strong>Daikokuya Tempura</strong><em>Asakusa · tendon since 1887</em><span>A bowl of tempura over rice in a wooden old-town building. Fast, filling, no menu anxiety.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Asakusa+Imahan+Kokusaidori+Honten" target="_blank" rel="noopener"><strong>Asakusa Imahan Kokusai-dori</strong><em>Asakusa · sukiyaki</em><span>Beef cooked at your table in a private tatami room. The splurge option, and a calm place for five people.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Tsukiji+Outer+Market" target="_blank" rel="noopener"><strong>Tsukiji Outer Market</strong><em>Tsukiji · street food</em><span>Ten minutes from the garden. Grilled scallops, tamagoyaki, strawberry daifuku. Everyone picks their own.</span><i>Open in Google Maps ↗</i></a></div>
+<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Tokyo_Cruise_Ship_Himiko.jpg/960px-Tokyo_Cruise_Ship_Himiko.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Tokyo Cruise Ship Himiko.jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg/960px-Rice_bowl_topped_with_shrimp_tempura_%288281030764%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Rice bowl topped with shrimp tempura (8281030764).jpg" loading="lazy"></div>
+<div class="dgrid">
+<div><h3>The day</h3><ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Taxi or train to Asakusa while the streets are still quiet. About 30 minutes from central Tokyo.</span></div></li><li><b>9:20</b><div><strong>Senso-ji temple and Nakamise street</strong><span>Tokyo&rsquo;s oldest temple. Photos at the big red lantern, incense smoke, first snacks of the trip. The pier is a 5-minute walk from the temple.</span></div></li><li><b>10:40</b><div><strong>Sumida river cruise, about 40 minutes</strong><span>Everyone sits. Bridges, the skyline, Tokyo Skytree behind you. Kids can nap.</span></div></li><li><b>11:30</b><div><strong>Hama-rikyu gardens</strong><span>A short, flat walk in a 400-year-old garden. Tea house on the pond if energy allows.</span></div></li><li><b>12:30</b><div><strong>Lunch</strong><span>See the three picks below. Tsukiji is a 10-minute walk from the garden gate.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol></div>
+<div><h3>The route</h3><div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Asakusa+Station+Tokyo&daddr=Sensoji+Temple+to:Asakusa+Pier+Tokyo+Cruise+to:Hamarikyu+Gardens+to:Tsukiji+Outer+Market&output=embed" loading="lazy" title="Route for course A" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<p class="moves">Hotel → Asakusa about 30 min by train. Temple → pier 5 min on foot. Boat 40 min. Garden → Tsukiji 10 min on foot. Tsukiji → hotel about 20 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Asakusa+Station+Tokyo&destination=Tsukiji+Outer+Market&waypoints=Sensoji+Temple%7CAsakusa+Pier+Tokyo+Cruise%7CHamarikyu+Gardens&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p></div>
+</div>
+<h3>Where we eat</h3><div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Daikokuya+Tempura+Asakusa" target="_blank" rel="noopener"><strong>Daikokuya Tempura</strong><em>Asakusa · tendon since 1887</em><span>A bowl of tempura over rice in a wooden old-town building. Fast, filling, no menu anxiety.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Asakusa+Imahan+Kokusaidori+Honten" target="_blank" rel="noopener"><strong>Asakusa Imahan Kokusai-dori</strong><em>Asakusa · sukiyaki</em><span>Beef cooked at your table in a private tatami room. The splurge option, and a calm place for five people.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Tsukiji+Outer+Market" target="_blank" rel="noopener"><strong>Tsukiji Outer Market</strong><em>Tsukiji · street food</em><span>Ten minutes from the garden. Grilled scallops, tamagoyaki, strawberry daifuku. Everyone picks their own.</span><i>Open in Google Maps ↗</i></a></div>
 <div class="notes"><p><b>Good for</b> Little walking. Works at any energy level. Great photos.</p><p><b>Keep in mind</b> December river wind is cold, so bring layers. Boat times for Dec 21 to be confirmed.</p></div>
 <p class="links"><a href="https://www.senso-ji.jp/english/" target="_blank" rel="noopener">Senso-ji (official) ↗</a> <a href="https://www.suijobus.co.jp/en/" target="_blank" rel="noopener">Tokyo Cruise (official) ↗</a> <a href="https://www.tokyo-park.or.jp/teien/en/hama-rikyu/" target="_blank" rel="noopener">Hama-rikyu gardens ↗</a></p>
 <a class="choose" href="mailto:icchan417@gmail.com?subject=Dec 21 tour: we choose course A (Asakusa &amp; the river)">Choose course A</a>
-</div></section><section class="course" id="course-B">
-<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Photos_at_teamlab_planets_tokyo.jpg/960px-Photos_at_teamlab_planets_tokyo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Photos at teamlab planets tokyo.jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG/960px-Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Toyosu Senkyaku Banrai 2F Edomae Plaza 2024.JPG" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG/960px-Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Toyosu Senkyaku Banrai 3F Food Court 2024.JPG" loading="lazy"></div>
-<div class="body">
-<p class="kicker">Course B · Indoor wow, one place only</p>
-<h2>teamLab Planets &amp; Toyosu</h2>
+</div></section><section class="detail" id="detail-B" hidden><div class="dwrap">
+<div class="dhead"><div><p class="kicker">Course B · Indoor wow, one place only</p><h2>teamLab Planets &amp; Toyosu</h2></div>
+<button class="dclose" type="button" aria-label="Close">Close ✕</button></div>
 <p class="why">One venue for the whole morning, then lunch next door. Nothing depends on the weather, and the water rooms wake everyone up.</p>
-<ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Train or taxi to Toyosu. About 25 minutes from central Tokyo.</span></div></li><li><b>9:30</b><div><strong>teamLab Planets, about 2 hours</strong><span>Barefoot digital art museum. You walk through water and light, and the rooms react to you.</span></div></li><li><b>11:45</b><div><strong>Toyosu Senkyaku Banrai</strong><span>Edo-style food street beside the fish market. A 10-minute walk from the museum.</span></div></li><li><b>13:00</b><div><strong>Free time or an early return</strong><span>There is a rooftop hot-spring footbath in the same building.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol>
-<h3>The route</h3>
-<div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Toyosu+Station+Tokyo&daddr=teamLab+Planets+TOKYO+to:Toyosu+Senkyaku+Banrai&output=embed" loading="lazy" title="Route for course B" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-<p class="moves">Hotel → Shin-Toyosu about 25 min by train. Station → museum 1 min on foot. Museum → food street 10 min on foot. Toyosu → hotel about 25 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Toyosu+Station+Tokyo&destination=Toyosu+Senkyaku+Banrai&waypoints=teamLab+Planets+TOKYO&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p>
-<h3>Where we eat</h3>
-<div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Sushi+Dai+Toyosu+Market" target="_blank" rel="noopener"><strong>Sushi Dai</strong><em>Toyosu Market · sushi</em><span>The market&rsquo;s most famous sushi counter. Worth it, but the queue is long, so we go straight there or skip it.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Daiwa+Sushi+Toyosu+Market" target="_blank" rel="noopener"><strong>Daiwa Sushi</strong><em>Toyosu Market · sushi</em><span>The other market classic, usually a shorter wait than Sushi Dai. Chef-picked sets.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Toyosu+Senkyaku+Banrai+Mekiki+Yokocho" target="_blank" rel="noopener"><strong>Mekiki Yokocho, Senkyaku Banrai</strong><em>Toyosu · food street</em><span>Twenty small shops under one roof: rice bowls, grilled seafood, wagyu skewers, ice cream. Easiest with five people and different appetites.</span><i>Open in Google Maps ↗</i></a></div>
+<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG/960px-Toyosu_Senkyaku_Banrai_2F_Edomae_Plaza_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Toyosu Senkyaku Banrai 2F Edomae Plaza 2024.JPG" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG/960px-Toyosu_Senkyaku_Banrai_3F_Food_Court_2024.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Toyosu Senkyaku Banrai 3F Food Court 2024.JPG" loading="lazy"></div>
+<div class="dgrid">
+<div><h3>The day</h3><ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Train or taxi to Toyosu. About 25 minutes from central Tokyo.</span></div></li><li><b>9:30</b><div><strong>teamLab Planets, about 2 hours</strong><span>Barefoot digital art museum. You walk through water and light, and the rooms react to you.</span></div></li><li><b>11:45</b><div><strong>Toyosu Senkyaku Banrai</strong><span>Edo-style food street beside the fish market. A 10-minute walk from the museum.</span></div></li><li><b>13:00</b><div><strong>Free time or an early return</strong><span>There is a rooftop hot-spring footbath in the same building.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol></div>
+<div><h3>The route</h3><div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Toyosu+Station+Tokyo&daddr=teamLab+Planets+TOKYO+to:Toyosu+Senkyaku+Banrai&output=embed" loading="lazy" title="Route for course B" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<p class="moves">Hotel → Shin-Toyosu about 25 min by train. Station → museum 1 min on foot. Museum → food street 10 min on foot. Toyosu → hotel about 25 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Toyosu+Station+Tokyo&destination=Toyosu+Senkyaku+Banrai&waypoints=teamLab+Planets+TOKYO&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p></div>
+</div>
+<h3>Where we eat</h3><div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Sushi+Dai+Toyosu+Market" target="_blank" rel="noopener"><strong>Sushi Dai</strong><em>Toyosu Market · sushi</em><span>The market&rsquo;s most famous sushi counter. Worth it, but the queue is long, so we go straight there or skip it.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Daiwa+Sushi+Toyosu+Market" target="_blank" rel="noopener"><strong>Daiwa Sushi</strong><em>Toyosu Market · sushi</em><span>The other market classic, usually a shorter wait than Sushi Dai. Chef-picked sets.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Toyosu+Senkyaku+Banrai+Mekiki+Yokocho" target="_blank" rel="noopener"><strong>Mekiki Yokocho, Senkyaku Banrai</strong><em>Toyosu · food street</em><span>Twenty small shops under one roof: rice bowls, grilled seafood, wagyu skewers, ice cream. Easiest with five people and different appetites.</span><i>Open in Google Maps ↗</i></a></div>
 <div class="notes"><p><b>Good for</b> Weatherproof. Only two moves all morning. The single most memorable spot for kids.</p><p><b>Keep in mind</b> December tickets sell out, so we book early. You get wet up to the knees, and shorts are provided. Bright immersive rooms can be a lot for a very tired child.</p></div>
 <p class="links"><a href="https://www.teamlab.art/e/planets/" target="_blank" rel="noopener">teamLab Planets (official) ↗</a> <a href="https://www.youtube.com/@teamLabART" target="_blank" rel="noopener">Watch the rooms in motion (teamLab official channel) ↗</a> <a href="https://toyosu-senkyakubanrai.jp/" target="_blank" rel="noopener">Toyosu Senkyaku Banrai (official) ↗</a></p>
 <a class="choose" href="mailto:icchan417@gmail.com?subject=Dec 21 tour: we choose course B (teamLab Planets &amp; Toyosu)">Choose course B</a>
-</div></section><section class="course" id="course-C">
-<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg/960px-Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Traditional wedding at Meiji-jingu, 2006-10-29.jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg/960px-Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Takeshita Dori, Harajuku (44191369751).jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Shibuya_scramble_av_night_from_Stream.jpg/960px-Shibuya_scramble_av_night_from_Stream.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Shibuya scramble av night from Stream.jpg" loading="lazy"></div>
-<div class="body">
-<p class="kicker">Course C · Morning light to reset jet lag</p>
-<h2>Meiji shrine, Harajuku &amp; Shibuya</h2>
+</div></section><section class="detail" id="detail-C" hidden><div class="dwrap">
+<div class="dhead"><div><p class="kicker">Course C · Morning light to reset jet lag</p><h2>Meiji shrine, Harajuku &amp; Shibuya</h2></div>
+<button class="dclose" type="button" aria-label="Close">Close ✕</button></div>
 <p class="why">Daylight is the fastest jet-lag fix. A quiet forest walk first, then the colourful side of Tokyo once the family is properly awake.</p>
-<ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Train or taxi to Harajuku. About 20 minutes from central Tokyo.</span></div></li><li><b>9:20</b><div><strong>Meiji Jingu shrine</strong><span>A flat walk through a forest in the middle of the city, benches along the way. Sunday mornings are calm.</span></div></li><li><b>10:30</b><div><strong>Takeshita street</strong><span>Harajuku&rsquo;s teen street opens up. Crepes, character shops, photo booths.</span></div></li><li><b>12:00</b><div><strong>Lunch on Omotesando</strong><span>Sit-down lunch away from the crowd, 10 minutes on foot.</span></div></li><li><b>13:00</b><div><strong>Shibuya scramble crossing</strong><span>Cross it once, watch it from above, then head back.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol>
-<h3>The route</h3>
-<div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Harajuku+Station+Tokyo&daddr=Meiji+Jingu+Shrine+to:Takeshita+Street+Harajuku+to:Omotesando+Tokyo+to:Shibuya+Scramble+Crossing&output=embed" loading="lazy" title="Route for course C" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-<p class="moves">Hotel → Harajuku about 20 min by train. Shrine walk 10 min each way. Harajuku → Omotesando 10 min on foot. Omotesando → Shibuya 12 min on foot. Shibuya → hotel about 20 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Harajuku+Station+Tokyo&destination=Shibuya+Scramble+Crossing&waypoints=Meiji+Jingu+Shrine%7CTakeshita+Street+Harajuku%7COmotesando+Tokyo&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p>
-<h3>Where we eat</h3>
-<div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Marion+Crepes+Takeshita+Street+Harajuku" target="_blank" rel="noopener"><strong>Marion Crepes</strong><em>Takeshita street · crepes</em><span>The stand that started the Harajuku crepe. Thirty fillings on the photo menu, eaten while walking.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Maisen+Aoyama+Honten" target="_blank" rel="noopener"><strong>Maisen Aoyama</strong><em>Omotesando · tonkatsu</em><span>Breaded pork cutlet in a converted bathhouse. Sit-down, quiet, and easy for children.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Uobei+Shibuya+Dogenzaka" target="_blank" rel="noopener"><strong>Uobei Shibuya Dogenzaka</strong><em>Shibuya · conveyor sushi</em><span>You order on a tablet and the plates fly to your seat on a rail. Cheap, fast, and kids ask to go back.</span><i>Open in Google Maps ↗</i></a></div>
+<div class="photos"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg/960px-Takeshita_Dori%2C_Harajuku_%2844191369751%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Takeshita Dori, Harajuku (44191369751).jpg" loading="lazy"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Shibuya_scramble_av_night_from_Stream.jpg/960px-Shibuya_scramble_av_night_from_Stream.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Shibuya scramble av night from Stream.jpg" loading="lazy"></div>
+<div class="dgrid">
+<div><h3>The day</h3><ol class="steps"><li><b>9:00</b><div><strong>Leave the hotel</strong><span>Train or taxi to Harajuku. About 20 minutes from central Tokyo.</span></div></li><li><b>9:20</b><div><strong>Meiji Jingu shrine</strong><span>A flat walk through a forest in the middle of the city, benches along the way. Sunday mornings are calm.</span></div></li><li><b>10:30</b><div><strong>Takeshita street</strong><span>Harajuku&rsquo;s teen street opens up. Crepes, character shops, photo booths.</span></div></li><li><b>12:00</b><div><strong>Lunch on Omotesando</strong><span>Sit-down lunch away from the crowd, 10 minutes on foot.</span></div></li><li><b>13:00</b><div><strong>Shibuya scramble crossing</strong><span>Cross it once, watch it from above, then head back.</span></div></li><li><b>14:00</b><div><strong>Back at the hotel</strong><span>Nap time.</span></div></li></ol></div>
+<div><h3>The route</h3><div class="mapbox"><iframe src="https://maps.google.com/maps?saddr=Harajuku+Station+Tokyo&daddr=Meiji+Jingu+Shrine+to:Takeshita+Street+Harajuku+to:Omotesando+Tokyo+to:Shibuya+Scramble+Crossing&output=embed" loading="lazy" title="Route for course C" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+<p class="moves">Hotel → Harajuku about 20 min by train. Shrine walk 10 min each way. Harajuku → Omotesando 10 min on foot. Omotesando → Shibuya 12 min on foot. Shibuya → hotel about 20 min. <a href="https://www.google.com/maps/dir/?api=1&origin=Harajuku+Station+Tokyo&destination=Shibuya+Scramble+Crossing&waypoints=Meiji+Jingu+Shrine%7CTakeshita+Street+Harajuku%7COmotesando+Tokyo&travelmode=transit" target="_blank" rel="noopener">Open the route in Google Maps ↗</a></p></div>
+</div>
+<h3>Where we eat</h3><div class="eats"><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Marion+Crepes+Takeshita+Street+Harajuku" target="_blank" rel="noopener"><strong>Marion Crepes</strong><em>Takeshita street · crepes</em><span>The stand that started the Harajuku crepe. Thirty fillings on the photo menu, eaten while walking.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Maisen+Aoyama+Honten" target="_blank" rel="noopener"><strong>Maisen Aoyama</strong><em>Omotesando · tonkatsu</em><span>Breaded pork cutlet in a converted bathhouse. Sit-down, quiet, and easy for children.</span><i>Open in Google Maps ↗</i></a><a class="eat" href="https://www.google.com/maps/search/?api=1&query=Uobei+Shibuya+Dogenzaka" target="_blank" rel="noopener"><strong>Uobei Shibuya Dogenzaka</strong><em>Shibuya · conveyor sushi</em><span>You order on a tablet and the plates fly to your seat on a rail. Cheap, fast, and kids ask to go back.</span><i>Open in Google Maps ↗</i></a></div>
 <div class="notes"><p><b>Good for</b> No tickets needed. Easy to shorten if anyone fades. Best course for jet lag.</p><p><b>Keep in mind</b> Sunday Harajuku gets crowded after 11:00. A bit more walking than course A.</p></div>
 <p class="links"><a href="https://www.meijijingu.or.jp/en/" target="_blank" rel="noopener">Meiji Jingu (official) ↗</a> <a href="https://www.google.com/maps/search/?api=1&query=Takeshita+Street+Harajuku" target="_blank" rel="noopener">Takeshita street ↗</a> <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Scramble+Crossing" target="_blank" rel="noopener">Shibuya crossing ↗</a></p>
 <a class="choose" href="mailto:icchan417@gmail.com?subject=Dec 21 tour: we choose course C (Meiji shrine, Harajuku &amp; Shibuya)">Choose course C</a>
-</div></section></main>
+</div></section>
+<div class="sechead"><span class="n">2</span><div><b>From the airport</b> <span>Haneda is 30 to 45 minutes from central Tokyo.</span></div></div>
+<div class="arrival">
+<div><p>All three courses stay close to the middle of the city, so nothing is far from your hotel.</p>
+<p class="hint">Tell me the hotel name and I will pin it here, with the exact door-to-door times for the course you choose. If one room is ready early, you can drop the bags and start light.</p></div>
+<div class="mapbox"><iframe src="https://maps.google.com/maps?q=Haneda+Airport+Tokyo&output=embed&z=12" loading="lazy" title="Haneda airport and central Tokyo" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+</div>
+</div>
 <footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p><p>Photos: Sensoji0387.jpg (Public domain); Tokyo Cruise Ship Himiko.jpg (CC BY-SA 3.0); Rice bowl topped with shrimp tempura (8281030764).jpg (CC BY-SA 2.0); Photos at teamlab planets tokyo.jpg (CC BY-SA 4.0); Toyosu Senkyaku Banrai 2F Edomae Plaza 2024.JPG (CC BY 4.0); Toyosu Senkyaku Banrai 3F Food Court 2024.JPG (CC BY 4.0); Traditional wedding at Meiji-jingu, 2006-10-29.jpg (CC BY-SA 2.0); Takeshita Dori, Harajuku (44191369751).jpg (CC BY 2.0); Shibuya scramble av night from Stream.jpg (CC0), via Wikimedia Commons.</p></footer>
+<script>
+(function(){
+ var cards=[].slice.call(document.querySelectorAll('.mcard'));
+ function close(id){var d=document.getElementById('detail-'+id);d.classList.remove('open');setTimeout(function(){if(!d.classList.contains('open'))d.hidden=true},320);
+   document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','false')}
+ function open_(id){var d=document.getElementById('detail-'+id);d.hidden=false;requestAnimationFrame(function(){d.classList.add('open')});
+   document.querySelector('.mcard[data-course="'+id+'"]').setAttribute('aria-expanded','true')}
+ cards.forEach(function(b){
+  b.addEventListener('click',function(){
+   var id=b.dataset.course,was=b.getAttribute('aria-expanded')==='true';
+   cards.forEach(function(o){if(o.getAttribute('aria-expanded')==='true')close(o.dataset.course)});
+   if(was)return;
+   open_(id);
+   setTimeout(function(){document.getElementById('detail-'+id).scrollIntoView({behavior:'smooth',block:'start'})},60);
+  });
+ });
+ document.querySelectorAll('.dclose').forEach(function(x){
+  x.addEventListener('click',function(){var d=x.closest('.detail'),id=d.id.replace('detail-','');close(id);
+   document.querySelector('.mcard[data-course="'+id+'"]').scrollIntoView({behavior:'smooth',block:'center'})});
+ });
+})();
+</script>
 <script src="devbar.js"></script></body></html>
