@@ -122,8 +122,8 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .mb{{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}}
 .mk{{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}}
 .mt{{display:block;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-.025em;margin-bottom:6px}}
-.mtag{{display:block;font-size:15px;color:var(--mute);margin-bottom:12px}} .mch{{margin-top:auto}}
-.mch{{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px}}
+.mtag{{display:block;font-size:15px;color:var(--mute);margin-bottom:12px}}
+.mch{{list-style:none;margin:auto 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px}}
 .mch li{{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:4px;padding:3px 8px;color:var(--mute)}}
 .mopen{{align-self:flex-start;display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
 .mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
