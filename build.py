@@ -168,6 +168,8 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .arrival p{{margin:0 0 10px;font-size:16px}} .arrival .hint{{color:var(--mute);font-size:15px}}
 .arrival .mapbox iframe{{height:260px}}
 footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}} footer p{{margin:0 0 6px}}
+.cred summary{{cursor:pointer;font-size:12px;color:var(--mute);opacity:.75;list-style:none;display:inline-block;text-decoration:underline;text-underline-offset:3px}}
+.cred summary::-webkit-details-marker{{display:none}} .cred p{{margin:8px 0 0;font-size:11.5px;line-height:1.6;opacity:.8}}
 @media(max-width:820px){{
  .menu{{grid-template-columns:1fr}} .mcard>img{{aspect-ratio:16/9}}
  .dgrid,.eats,.notes,.arrival,.photos{{grid-template-columns:1fr}}
@@ -206,7 +208,7 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
 <header class="wrap">
 <p class="kicker">Tokyo · Sunday, December 21</p>
 <h1>Arrival day, done gently.</h1>
-<p>You land at Haneda at 5:10 in the morning. Every course starts at your hotel at 9:00 and has you back by 14:00 for a nap. Little walking, plenty of sitting, and one thing worth remembering.</p>
+<p>Landing at 5:10, back at the hotel by 14:00. Little walking, and one thing worth remembering.</p>
 <ul class="facts"><li><b>Guide</b> Yuuki</li><li><b>Time</b> 9:00–14:00</li><li><b>Group</b> family of five</li><li><b>Start and end</b> your hotel</li></ul>
 </header>
 <div class="wrap">
@@ -220,7 +222,8 @@ footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px soli
 <div class="mapbox"><iframe src="{emb('Haneda Airport Tokyo')}" loading="lazy" title="Haneda airport and central Tokyo" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 </div>
 </div>
-<footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p><p>Photos: {credits}, via Wikimedia Commons.</p></footer>
+<footer class="wrap"><p>Reply to Tree or Yuuki with A, B or C. Times are approximate and can move earlier or later on the day.</p>
+<details class="cred"><summary>Photo credits</summary><p>{credits}, via Wikimedia Commons.</p></details></footer>
 <script>
 (function(){{
  var cards=[].slice.call(document.querySelectorAll('.mcard'));
