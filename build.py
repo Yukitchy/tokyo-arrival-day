@@ -169,9 +169,38 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .arrival .mapbox iframe{{height:260px}}
 footer{{padding:26px 0 60px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}} footer p{{margin:0 0 6px}}
 @media(max-width:820px){{
- header{{padding:36px 0 22px}} .menu{{grid-template-columns:1fr}} .mcard>img{{aspect-ratio:16/9}}
+ .menu{{grid-template-columns:1fr}} .mcard>img{{aspect-ratio:16/9}}
  .dgrid,.eats,.notes,.arrival,.photos{{grid-template-columns:1fr}}
  .dwrap>*{{margin-left:18px;margin-right:18px}} .mapbox iframe{{height:230px}}
+}}
+@media(max-width:560px){{
+ .wrap{{padding:0 18px}}
+ header{{padding:26px 0 18px}}
+ h1{{font-size:31px;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}}
+ header p{{font-size:16px;line-height:1.55;max-width:none}}
+ .facts{{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin-top:16px;font-size:13px;line-height:1.5}}
+ .facts li{{display:contents}} .facts b{{white-space:nowrap}}
+ .sechead{{display:block;padding:22px 0 12px}}
+ .sechead .n{{font-size:20px;margin-right:8px;display:inline}}
+ .sechead b{{font-size:17px}} .sechead span{{display:block;font-size:13px;line-height:1.5;margin-top:2px}}
+ .menu{{gap:12px}}
+ .mb{{padding:15px 16px 16px}} .mt{{font-size:23px;line-height:1.15}} .mtag{{font-size:14px;margin-bottom:10px}}
+ .mch{{gap:5px;margin-bottom:12px}} .mch li{{font-size:10.5px;padding:2px 7px}}
+ .mopen{{font-size:13.5px}}
+ h2{{font-size:26px;line-height:1.12}}
+ .dhead{{padding-top:20px}} .why{{font-size:15.5px;line-height:1.55;margin:8px 0 16px}}
+ .dwrap>*{{margin-left:16px;margin-right:16px}}
+ .photos{{gap:8px;margin-bottom:20px}} .photos img{{aspect-ratio:3/2}}
+ h3{{margin:22px 0 10px}} .dgrid{{gap:0;margin-bottom:0}}
+ .steps li{{grid-template-columns:52px minmax(0,1fr);gap:10px;padding:10px 0}}
+ .steps strong{{font-size:15.5px}} .steps span{{font-size:13.5px;line-height:1.5}}
+ .eats{{gap:10px;margin-bottom:20px}} .eat>img{{aspect-ratio:16/9}} .eb{{padding:12px 14px 14px}}
+ .notes{{gap:10px;margin-bottom:16px}} .notes p{{padding:14px 16px;font-size:13.5px}}
+ .links{{font-size:13.5px;gap:4px 14px;margin-bottom:18px}}
+ .choose{{display:block;text-align:center;padding:15px 0;margin-bottom:22px}}
+ .arrival{{gap:16px;padding-bottom:32px}} .arrival p{{font-size:15.5px;line-height:1.55}} .arrival .hint{{font-size:14px}}
+ .mapbox iframe{{height:210px}}
+ footer{{padding:20px 0 44px;font-size:11.5px;line-height:1.55}}
 }}
 </style></head><body>
 <header class="wrap">
