@@ -99,32 +99,32 @@ def detail(c):
 credits = '; '.join(html.escape(x['title']) + ' (' + x['lic'] + ')' for v in PH.values() for x in v)
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokyo, arrival day: three courses for the Katz family</title><meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{{--bg:#faf7f1;--card:#fff;--ink:#221f1b;--mute:#6b655c;--line:#e8e2d7;--acc:#2f6b4f;--r:18px}}
+:root{{--bg:#fffdf6;--card:#fff;--ink:#111;--mute:#767065;--line:#eae4d6;--acc:#1a5c3a;--r:10px}}
 *{{box-sizing:border-box;min-width:0}} html,body{{overflow-x:hidden;max-width:100%}} img{{max-width:100%}}
 body{{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}}
 .wrap{{max-width:1080px;margin:0 auto;padding:0 20px}}
 .kicker{{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}}
-h1{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,6vw,60px);line-height:1.04;margin:0 0 16px}}
-h2{{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(32px,4.6vw,46px);line-height:1.05;margin:0}}
+h1{{font-weight:800;font-size:clamp(34px,5.4vw,54px);line-height:1.06;letter-spacing:-.025em;margin:0 0 16px}}
+h2{{font-weight:800;font-size:clamp(30px,4.2vw,42px);line-height:1.06;letter-spacing:-.025em;margin:0}}
 h3{{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}}
 header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:0;max-width:620px}}
 .facts{{display:flex;flex-wrap:wrap;gap:6px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)}} .facts b{{color:var(--ink);font-weight:600}}
 .sechead{{display:flex;align-items:baseline;gap:14px;padding:26px 0 16px;border-top:1px solid var(--line)}}
-.sechead .n{{font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--acc)}}
+.sechead .n{{font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;color:var(--acc)}}
 .sechead b{{font-size:19px;font-weight:600}} .sechead span{{font-size:14px;color:var(--mute)}}
 .menu{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
 .mcard{{display:block;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;padding:0;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}}
 .mcard:hover{{transform:translateY(-3px);box-shadow:0 10px 24px rgba(34,31,27,.10)}}
 .mcard[aria-expanded=true]{{border-color:var(--ink);box-shadow:0 10px 24px rgba(34,31,27,.14)}}
-.mcard>img{{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#efe9df}}
+.mcard>img{{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#f0ebe0}}
 .mb{{display:block;padding:18px 20px 20px}}
 .mk{{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}}
-.mt{{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:29px;line-height:1.08;margin-bottom:6px}}
+.mt{{display:block;font-weight:800;font-size:26px;line-height:1.12;letter-spacing:-.025em;margin-bottom:6px}}
 .mtag{{display:block;font-size:15px;color:var(--mute);margin-bottom:12px}}
 .mch{{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px}}
-.mch li{{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--mute)}}
+.mch li{{font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:4px;padding:3px 8px;color:var(--mute)}}
 .mopen{{display:inline-block;font-size:14px;font-weight:600;border-bottom:2px solid var(--acc);padding-bottom:1px}}
 .mcard[aria-expanded=true] .mopen::after{{content:" ▲"}} .mcard[aria-expanded=false] .mopen::after{{content:" ▾"}}
 .detail{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s ease;margin-top:16px}}
@@ -133,26 +133,26 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .detail.open .dwrap{{overflow:visible}}
 .dwrap>*{{margin-left:26px;margin-right:26px}} .dwrap>.photos{{margin-left:26px;margin-right:26px}}
 .dhead{{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding-top:26px}}
-.dclose{{flex:none;font:inherit;font-size:13px;font-weight:600;color:var(--mute);background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}}
+.dclose{{flex:none;font:inherit;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);background:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;cursor:pointer}}
 .dclose:hover{{color:var(--ink);border-color:var(--ink)}}
 .why{{font-size:17px;color:var(--mute);margin:10px 0 20px;max-width:640px}}
 .photos{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:26px}}
-.photos img{{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;background:#efe9df}}
+.photos img{{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:8px;background:#f0ebe0}}
 .dgrid{{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:28px}}
 .steps{{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}}
 .steps li{{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}}
 .steps b{{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:14px}} .steps strong{{display:block;font-weight:600;font-size:16px}} .steps span{{color:var(--mute);font-size:14px}}
-.mapbox{{border-radius:12px;overflow:hidden;background:#efe9df}} .mapbox iframe{{display:block;width:100%;height:300px;border:0}}
+.mapbox{{border-radius:8px;overflow:hidden;background:#f0ebe0}} .mapbox iframe{{display:block;width:100%;height:300px;border:0}}
 .moves{{font-size:14px;color:var(--mute);margin:12px 0 0}} .moves a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}}
 .eats{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:26px}}
-.eat{{display:block;text-decoration:none;color:inherit;background:var(--bg);border-radius:12px;padding:18px 20px}}
+.eat{{display:block;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:16px 18px}}
 .eat:hover{{outline:1px solid var(--ink)}}
-.eat strong{{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:22px;line-height:1.15}}
+.eat strong{{display:block;font-weight:700;font-size:18px;line-height:1.2;letter-spacing:-.015em}}
 .eat em{{display:block;font-style:normal;font-size:11px;color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:5px 0 9px}}
 .eat span{{display:block;font-size:14px;color:var(--mute)}} .eat i{{display:block;font-style:normal;font-size:12px;margin-top:10px;text-decoration:underline;text-underline-offset:3px}}
-.notes{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px}} .notes p{{margin:0;padding:16px 18px;background:var(--bg);border-radius:12px}} .notes b{{display:block;font-weight:600;margin-bottom:3px}}
+.notes{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px}} .notes p{{margin:0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-radius:8px}} .notes b{{display:block;font-weight:600;margin-bottom:3px}}
 .links{{margin:0 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}} .links a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
-.choose{{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:15px 30px;border-radius:999px;font-size:16px;margin-bottom:28px}} .choose:hover{{background:#3c3630}}
+.choose{{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:16px 32px;border-radius:8px;font-size:16px;letter-spacing:-.01em;margin-bottom:28px}} .choose:hover{{background:#333}}
 .arrival{{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;padding-bottom:40px}}
 .arrival p{{margin:0 0 10px;font-size:16px}} .arrival .hint{{color:var(--mute);font-size:15px}}
 .arrival .mapbox iframe{{height:260px}}
