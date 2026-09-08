@@ -66,7 +66,7 @@ COURSES = [
 ]
 
 def menu(c):
-    x = PH[c['id']][0]
+    x = PH[c['id']]['card']
     ch = ''.join(f'<li>{html.escape(t)}</li>' for t in c['chips'])
     return f'''<button class="mcard" type="button" data-course="{c['id']}" aria-expanded="false" aria-controls="detail-{c['id']}">
 <img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">
@@ -74,10 +74,13 @@ def menu(c):
 <span class="mtag">{html.escape(c['tag'])}</span><ul class="mch">{ch}</ul><span class="mopen">See the plan</span></span></button>'''
 
 def detail(c):
-    ph = ''.join(f'<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">' for x in PH[c['id']][1:])
+    ph = ''.join(f'<img src="{x["thumb"]}" alt="{html.escape(x["title"])}" loading="lazy">' for x in PH[c['id']]['detail'])
     st = ''.join(f'<li><b>{t}</b><div><strong>{h}</strong><span>{d}</span></div></li>' for t, h, d in c['steps'])
-    fd = ''.join(f'<a class="eat" href="{gm(q)}" target="_blank" rel="noopener"><strong>{n}</strong>'
-                 f'<em>{a}</em><span>{d}</span><i>Open in Google Maps ↗</i></a>' for n, a, d, q in c['food'])
+    fd = ''.join(f'<a class="eat" href="{gm(q)}" target="_blank" rel="noopener">'
+                 f'<img src="{im["thumb"]}" alt="{html.escape(im["title"])}" loading="lazy">'
+                 f'<span class="eb"><strong>{n}</strong><em>{a}</em><span>{d}</span>'
+                 f'<i>Open in Google Maps ↗</i></span></a>'
+                 for (n, a, d, q), im in zip(c['food'], PH[c['id']]['food']))
     ln = ' '.join(f'<a href="{u}" target="_blank" rel="noopener">{html.escape(t)} ↗</a>' for t, u in c['links'])
     sub = f'Dec 21 tour: we choose course {c["id"]} ({c["name"]})'
     return f'''<section class="detail" id="detail-{c['id']}" hidden><div class="dwrap">
@@ -96,7 +99,7 @@ def detail(c):
 <a class="choose" href="mailto:icchan417@gmail.com?subject={html.escape(sub)}">Choose course {c['id']}</a>
 </div></section>'''
 
-credits = '; '.join(html.escape(x['title']) + ' (' + x['lic'] + ')' for v in PH.values() for x in v)
+credits = '; '.join(html.escape(x['title']) + ' (' + x['lic'] + ')' for v in PH.values() for x in [v['card']] + v['detail'] + v['food'])
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokyo, arrival day: three courses for the Katz family</title><meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -145,11 +148,13 @@ header{{padding:56px 0 30px}} header p{{font-size:18px;color:var(--mute);margin:
 .mapbox{{border-radius:8px;overflow:hidden;background:#f0ebe0}} .mapbox iframe{{display:block;width:100%;height:300px;border:0}}
 .moves{{font-size:14px;color:var(--mute);margin:12px 0 0}} .moves a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}}
 .eats{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:26px}}
-.eat{{display:block;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:16px 18px}}
-.eat:hover{{outline:1px solid var(--ink)}}
+.eat{{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden}}
+.eat>img{{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:#f0ebe0}}
+.eb{{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px}}
+.eat:hover{{border-color:var(--ink)}}
 .eat strong{{display:block;font-weight:700;font-size:18px;line-height:1.2;letter-spacing:-.015em}}
 .eat em{{display:block;font-style:normal;font-size:11px;color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:5px 0 9px}}
-.eat span{{display:block;font-size:14px;color:var(--mute)}} .eat i{{display:block;font-style:normal;font-size:12px;margin-top:10px;text-decoration:underline;text-underline-offset:3px}}
+.eb>span{{display:block;font-size:14px;color:var(--mute)}} .eat i{{display:block;font-style:normal;font-size:12px;margin-top:auto;padding-top:10px;text-decoration:underline;text-underline-offset:3px}}
 .notes{{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;font-size:14px}} .notes p{{margin:0;padding:16px 18px;background:var(--bg);border:1px solid var(--line);border-radius:8px}} .notes b{{display:block;font-weight:600;margin-bottom:3px}}
 .links{{margin:0 0 22px;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}} .links a{{color:var(--ink);text-decoration:underline;text-underline-offset:3px}}
 .choose{{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;padding:16px 32px;border-radius:8px;font-size:16px;letter-spacing:-.01em;margin-bottom:28px}} .choose:hover{{background:#333}}
