@@ -1,45 +1,47 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokyo, arrival day: three courses for the Katz family</title><meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1a1a1a;--mute:#6b6b6b;--line:#e6e6e6;--acc:#d3382c;--bg:#fff}
+:root{--bg:#faf7f1;--card:#fff;--ink:#221f1b;--mute:#6b655c;--line:#e8e2d7;--acc:#2f6b4f;--r:18px}
 *{box-sizing:border-box;min-width:0} html,body{overflow-x:hidden;max-width:100%} img{max-width:100%}
-body{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+body{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
 .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header{padding:56px 0 28px;border-bottom:1px solid var(--line)}
-header .kicker{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
-h1{font-size:clamp(28px,4.5vw,44px);line-height:1.15;margin:0 0 14px;font-weight:800;letter-spacing:-.01em}
-header p{font-size:17px;color:var(--mute);margin:0;max-width:720px}
-.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)} .facts b{color:var(--ink);font-weight:600}
-h3{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute);margin:28px 0 12px}
-.arrival{padding:32px 0;border-bottom:1px solid var(--line)}
-.arrival .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.arrival p{margin:0 0 12px;font-size:16px} .arrival .hint{color:var(--mute);font-size:15px}
-.mapbox{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#f1f1f1}
-.mapbox iframe{display:block;width:100%;height:300px;border:0}
-.course{padding:40px 0;border-bottom:1px solid var(--line)}
-.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:22px;width:100%}
-.photos img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#f1f1f1}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);margin:0 0 6px}
-h2{font-size:28px;margin:0 0 8px;font-weight:800;letter-spacing:-.01em}
-.why{font-size:17px;margin:0 0 20px;max-width:720px}
+.disp{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:0;line-height:1.08}
+header{padding:64px 0 34px}
+header .kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 14px}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(38px,6.4vw,64px);line-height:1.04;margin:0 0 18px;letter-spacing:-.005em}
+header p{font-size:18px;color:var(--mute);margin:0;max-width:660px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:24px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)} .facts b{color:var(--ink);font-weight:600}
+h3{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:34px 0 14px}
+.arrival{padding:34px 0 40px;border-top:1px solid var(--line)}
+.arrival .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.arrival p{margin:0 0 12px;font-size:17px} .arrival .hint{color:var(--mute);font-size:15px}
+.mapbox{position:relative;border-radius:var(--r);overflow:hidden;background:#efe9df}
+.mapbox iframe{display:block;width:100%;height:320px;border:0}
+.course{padding:44px 0 52px;border-top:1px solid var(--line)}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:26px;width:100%}
+.photos img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r);background:#efe9df}
+.kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.4vw,52px);line-height:1.05;margin:0 0 14px;letter-spacing:-.005em}
+.why{font-size:18px;margin:0 0 26px;max-width:700px;color:var(--mute)}
 .steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
-.steps li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-.steps b{font-variant-numeric:tabular-nums;color:var(--acc)} .steps strong{display:block;font-weight:600} .steps span{color:var(--mute);font-size:15px}
-.moves{font-size:15px;color:var(--mute);margin:10px 0 0} .moves a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-.eats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.eat{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:10px;padding:16px 18px;transition:border-color .15s}
-.eat:hover{border-color:var(--ink)} .eat strong{display:block;font-weight:600;font-size:17px}
-.eat em{display:block;font-style:normal;font-size:13px;color:var(--acc);font-weight:600;margin:2px 0 8px}
-.eat span{display:block;font-size:15px;color:var(--mute)} .eat i{display:block;font-style:normal;font-size:13px;margin-top:10px;text-decoration:underline;text-underline-offset:3px}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0 18px;font-size:15px} .notes p{margin:0;padding:14px 16px;background:#f7f7f5;border-radius:10px} .notes b{display:block;font-weight:600;margin-bottom:2px}
-.links{margin:0 0 20px;font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px} .links a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.choose{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;font-weight:600;padding:14px 26px;border-radius:999px;font-size:16px} .choose:hover{background:#b52f25}
-footer{padding:32px 0 60px;font-size:13px;color:var(--mute)} footer p{margin:0 0 6px}
+.steps li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.steps b{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600;font-size:15px} .steps strong{display:block;font-weight:600;font-size:17px} .steps span{color:var(--mute);font-size:15px}
+.moves{font-size:15px;color:var(--mute);margin:12px 0 0} .moves a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.eats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.eat{display:block;text-decoration:none;color:inherit;background:var(--card);border-radius:var(--r);padding:20px 22px;transition:transform .15s}
+.eat:hover{transform:translateY(-2px)}
+.eat strong{display:block;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:24px;line-height:1.15}
+.eat em{display:block;font-style:normal;font-size:12px;color:var(--acc);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 10px}
+.eat span{display:block;font-size:15px;color:var(--mute)} .eat i{display:block;font-style:normal;font-size:13px;margin-top:12px;text-decoration:underline;text-underline-offset:3px}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0 22px;font-size:15px} .notes p{margin:0;padding:18px 20px;background:var(--card);border-radius:var(--r)} .notes b{display:block;font-weight:600;margin-bottom:4px}
+.links{margin:0 0 26px;font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px} .links a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.choose{display:inline-block;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;padding:16px 32px;border-radius:999px;font-size:16px} .choose:hover{background:#3c3630}
+footer{padding:36px 0 70px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)} footer p{margin:0 0 6px}
 @media(max-width:700px){
- header{padding:36px 0 22px} .arrival .grid{grid-template-columns:1fr}
+ header{padding:40px 0 26px} .arrival .grid{grid-template-columns:1fr}
  .photos{grid-template-columns:1fr 1fr} .photos img:first-child{grid-column:span 2;aspect-ratio:16/9}
- .eats{grid-template-columns:1fr} .notes{grid-template-columns:1fr} .mapbox iframe{height:240px}
+ .eats{grid-template-columns:1fr} .notes{grid-template-columns:1fr} .mapbox iframe{height:250px}
 }
 </style></head><body>
 <header><div class="wrap">
