@@ -10,7 +10,24 @@ body{margin:0;font-family:Inter,-apple-system,"Hiragino Sans",sans-serif;color:v
 h1{font-weight:800;font-size:clamp(34px,5.4vw,54px);line-height:1.06;letter-spacing:-.025em;margin:0 0 16px}
 h2{font-weight:800;font-size:clamp(30px,4.2vw,42px);line-height:1.06;letter-spacing:-.025em;margin:0}
 h3{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
-header.wrap{padding:56px 20px 30px} header p{font-size:18px;color:var(--mute);margin:0;max-width:620px}
+
+.hpic{position:relative;background:#111;color:#fff}
+.slides{position:absolute;inset:0;overflow:hidden}
+.slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.1s ease,transform 5s linear}
+.slides img.on{opacity:1;transform:scale(1)}
+.slides:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08) 30%,rgba(0,0,0,.74))}
+.hcap{position:relative;z-index:1;min-height:62vh;max-height:600px;display:flex;flex-direction:column;justify-content:flex-end;padding-top:48px;padding-bottom:22px}
+.hcap .kicker{color:#9ee3b8}
+.hcap h1{color:#fff;margin:0 0 14px;text-shadow:0 2px 14px rgba(0,0,0,.3)}
+.snav{display:flex;align-items:center;gap:10px}
+.slabel{font:inherit;font-size:12.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 13px;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dots{display:flex;gap:7px;margin-left:auto;flex:none}
+.dots button{width:9px;height:9px;padding:0;border:none;border-radius:50%;background:rgba(255,255,255,.45);cursor:pointer}
+.dots button.on{background:#fff}
+.hbody{padding-top:22px;padding-bottom:26px}
+@media(prefers-reduced-motion:reduce){.slides img{transition:none;transform:none}}
+
+header p{font-size:18px;color:var(--mute);margin:0;max-width:620px}
 .facts{display:flex;flex-wrap:wrap;gap:6px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:14px;color:var(--mute)} .facts b{color:var(--ink);font-weight:600}
 .sechead{display:flex;align-items:baseline;gap:14px;padding:26px 0 16px;border-top:1px solid var(--line)}
 .sechead .n{font-weight:800;font-size:26px;line-height:1;letter-spacing:-.02em;color:var(--acc)}
@@ -75,8 +92,8 @@ footer.wrap{padding:26px 20px 60px;font-size:13px;color:var(--mute);border-top:1
 }
 @media(max-width:560px){
  .wrap{padding:0 18px}
- header.wrap{padding:48px 18px 24px} .kicker{margin-bottom:14px}
- h1{font-size:31px;line-height:1.1;letter-spacing:-.03em;margin-bottom:14px}
+ .hcap{min-height:58vh;padding-bottom:18px} .hbody{padding-top:18px;padding-bottom:22px} .kicker{margin-bottom:12px}
+ h1{font-size:33px;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px}
  header p{font-size:16px;line-height:1.55;max-width:none}
  .facts{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin-top:16px;font-size:13px;line-height:1.5}
  .facts li{display:contents} .facts b{white-space:nowrap}
@@ -103,11 +120,17 @@ footer.wrap{padding:26px 20px 60px;font-size:13px;color:var(--mute);border-top:1
  footer.wrap{padding:20px 18px 44px;font-size:11.5px;line-height:1.55}
 }
 </style></head><body>
-<header class="wrap">
+<header class="hero">
+<div class="hpic"><div class="slides"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Sensoji0387.jpg/960px-Sensoji0387.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Asakusa &amp; the river" data-course="A" data-name="Asakusa &amp; the river"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Photos_at_teamlab_planets_tokyo.jpg/960px-Photos_at_teamlab_planets_tokyo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="teamLab Planets &amp; Toyosu" data-course="B" data-name="teamLab Planets &amp; Toyosu"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg/960px-Traditional_wedding_at_Meiji-jingu%2C_2006-10-29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Meiji shrine, Harajuku &amp; Shibuya" data-course="C" data-name="Meiji shrine, Harajuku &amp; Shibuya"></div>
+<div class="wrap hcap">
 <p class="kicker">Tokyo · Sunday, December 21</p>
 <h1>Arrival day, done gently.</h1>
+<div class="snav"><button class="slabel" type="button"></button><div class="dots"><button type="button" aria-label="Show course A"></button><button type="button" aria-label="Show course B"></button><button type="button" aria-label="Show course C"></button></div></div>
+</div></div>
+<div class="wrap hbody">
 <p>Landing at 5:10, back at the hotel by 14:00. Little walking, and one thing worth remembering.</p>
 <ul class="facts"><li><b>Guide</b> Yuuki</li><li><b>Time</b> 9:00–14:00</li><li><b>Group</b> family of five</li><li><b>Start and end</b> your hotel</li></ul>
+</div>
 </header>
 <div class="wrap">
 <div class="sechead"><span class="n">1</span><div><b>Pick a course</b> <span>Tap one to see the plan, the route and where we eat.</span></div></div>
@@ -202,5 +225,16 @@ footer.wrap{padding:26px 20px 60px;font-size:13px;color:var(--mute);border-top:1
    document.querySelector('.mcard[data-course="'+id+'"]').scrollIntoView({behavior:'smooth',block:'center'})});
  });
 })();
+
+ (function(){
+  var sl=[].slice.call(document.querySelectorAll('.slides img')),dots=[].slice.call(document.querySelectorAll('.dots button')),lab=document.querySelector('.slabel'),i=0,t;
+  function show(n){i=n;sl.forEach(function(x,k){x.classList.toggle('on',k===n)});dots.forEach(function(x,k){x.classList.toggle('on',k===n)});
+   lab.textContent='Course '+sl[n].dataset.course+' · '+sl[n].dataset.name;lab.dataset.course=sl[n].dataset.course}
+  function go(){clearInterval(t);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setInterval(function(){show((i+1)%sl.length)},4000)}
+  dots.forEach(function(d,k){d.addEventListener('click',function(){show(k);go()})});
+  lab.addEventListener('click',function(){document.querySelector('.mcard[data-course="'+lab.dataset.course+'"]').click()});
+  show(0);go();
+ })();
+
 </script>
 <script>window.DEVBAR_FORCE=1</script><script src="devbar.js?v=3"></script></body></html>
